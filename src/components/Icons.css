@@ -1,0 +1,40 @@
+.icons {
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto ;
+    align-items: center;
+ 
+}
+
+.img-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    opacity: 0.7;
+    border-bottom: 1px solid #ffffff;
+
+
+}
+
+.img-box:hover {
+    opacity: 1;
+    border-bottom: 1px solid #000000;
+    transition: all 0.3s;
+}
+
+.icons-img{
+    height: 2rem;
+    width: 2rem;
+    object-fit: contain;
+}
+
+.img-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #717171;
+    
+}
+

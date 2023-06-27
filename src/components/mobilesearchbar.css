@@ -1,0 +1,12 @@
+.m-search-bar {
+    display: none;
+
+}
+
+@media only screen and (max-width: 800px) {
+    .m-search-bar {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

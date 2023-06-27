@@ -1,0 +1,137 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+}
+
+.navbar-logo{
+    height: 2rem;
+}
+
+.search{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 2rem;
+    border: 1px solid #ddd;
+    border-radius: 3rem;
+    box-shadow: 0 1px 2px rgb(0 0 0/8%), 0 4px 12px rgb(0, 0, 0/ 5%);
+}
+
+.search-item{
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    border-right: 1px solid #ddd ;
+    padding-right: 0.5rem;
+    padding: 0px 16px;
+    color: #222222;
+    
+}
+
+.search-item2{
+    font-size: 14px;
+    font-weight: 600;
+    color: #ddd;
+    padding-right: 0.5rem;
+    padding: 0px 16px;
+}
+
+.search:hover{
+    box-shadow: 0 1px 2px rgb(0 0 0/ 10%), 0 4px 12px rgb(0 0 0/ 8%);
+    transition: all 0.2s;
+
+}
+
+.search-icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 50%;
+    background-color: #40E0D0;
+
+
+}
+
+.nav-items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+}
+.item{
+    padding-right: 10px; 
+   
+    font-weight: 600;
+    border-radius: 3rem;
+    cursor: pointer;
+
+
+}
+.item:hover{
+    background-color: #f7f7f7;
+}
+
+.trips{
+    padding-right: 10px; 
+    font-weight: 600;
+    border-radius: 3rem;
+    cursor: pointer;
+
+
+}
+.trips:hover{
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+.profile{
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.profile-item{
+    display: flex;
+    justify-self: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    color: #717171;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 2rem;
+}
+
+.menu-item{
+    margin-top: 0.5rem !important;
+}
+
+
+
+
+.bottom-navigation{
+    display: none;
+}
+@media only screen and (max-width: 700px) {
+    .search,
+    .nav-items,
+    .navbar-logo{
+        display: none;
+
+    }
+    .bottom-navigation {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid #ddd;
+        box-shadow: 0 1px 2px rgb(0 0 0/8%), 0 4px 12px rgb(0, 0, 0/ 5%);
+    
+    }
+
+}
