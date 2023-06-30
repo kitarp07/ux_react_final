@@ -1,0 +1,90 @@
+.cards-flex {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0rem 1rem;
+    
+}
+
+.card-img {
+    width: 321px;
+    height:  305px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    /* cursor: pointer; */
+    
+}
+
+.card-img:hover{
+    scale: 1.005;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+
+}
+
+/* .card-rating {
+    display: flex;
+    margin-top: 5px;
+
+    justify-content: center;
+    
+   
+} */
+
+.place-name{
+    font-size: 15px;
+    font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+    font-weight: 600;
+    margin-top: 7px;
+    margin-left: 5px;
+    margin-bottom: 0.2px;
+  
+}
+
+/* .rating-num {
+    margin-top: 1.2px;
+    font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+   
+} */
+
+.card-view{
+    margin-bottom: 0.rem;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-bottom: 0.2px;
+    color: #717171;
+    font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+}
+
+.card-price{
+    font-weight: 600;
+    margin-left: 5px;
+    font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+
+    
+}
+
+.card-date{
+    color: #717171;
+    font-size: 14px;
+    margin-left: 5px;
+    margin-bottom: 0.2px;
+    font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
+}
+
+
+
+.card {
+    border: none;
+    margin: 1rem;
+}
+
+.card .swiper-pagination-bullet-active {
+    /* background-color: white ; */
+}

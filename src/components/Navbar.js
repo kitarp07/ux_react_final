@@ -7,6 +7,9 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import BasicMenu from "./navmenu";
 import SimpleBottomNavigation from "./BottomNavigation";
 import MobileSearchBar from "./MobileSearchBar";
+
+
+
 // import userServices from '../services/userServices';
 
 export default function Navbar() {
@@ -65,143 +68,16 @@ export default function Navbar() {
         <div className="profile">
           <BasicMenu />
         </div>
-        
       </div>
       <MobileSearchBar />
-      
+
       <SimpleBottomNavigation />
 
-      {/* --------------------------------- */}
+      
 
-      {/* <div className="navbarMain">
-        <div className="navLeft">
-          <span className="logo">Chat</span>
-        </div>
+   
 
-        <div className="navCenter">
-          <div></div>
-        </div>
-
-        <div className="navRight">
-          <div className="links">
-            <div className="navLink" onClick={() => navigate("/")}>
-              Home
-            </div>
-
-            <div class="dropdown">
-              <div className="navLink" class=" navLink dropbtn">
-                Settings
-              </div>
-              <div class="dropdown-content">
-                <a href="/editaccount">Edit Profile</a>
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#deleteModal"
-                >
-                  Delete Account
-                </a>
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#logoutModal"
-                >
-                  Logout
-                </a>
-              </div>
-            </div>
-            <div className="c" onClick={() => navigate("/editaccount")}>
-              <div className="navImgC">
-                <img className="navImg" src="" alt=""></img>
-              </div>
-              <div className="navName">
-                <span>user.fname </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="modal fade"
-        id="logoutModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Logout
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">Do you want to logout?</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={handleLogout}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="modal fade"
-        id="deleteModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Delete Account
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">Do you want to delete your account?</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={handleDelete}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
+     
     </div>
   );
 }

@@ -1,9 +1,13 @@
 .icons {
-    padding: 1rem 3rem;
+    border-top: 1px solid #ddd;
+    padding: 0rem 3rem;
     display: flex;
     justify-content: flex-start;
     overflow-x: auto ;
     align-items: center;
+    
+    
+    
  
 }
 
@@ -13,13 +17,17 @@
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    margin-left: 50px ;
     opacity: 0.7;
     border-bottom: 1px solid #ffffff;
+    cursor: pointer;
+    min-width: 70px;
 
 
 }
 
-.img-box:hover {
+.img-box:hover,.selected-box {
+    
     opacity: 1;
     border-bottom: 1px solid #000000;
     transition: all 0.3s;
@@ -36,5 +44,10 @@
     font-weight: 600;
     color: #717171;
     
+}
+
+.selected-label {
+    
+    color: #000000;
 }
 

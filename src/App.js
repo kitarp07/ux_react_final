@@ -11,15 +11,17 @@ import {
 import Navbar from "./components/Navbar";
 import Icons from "./components/Icons";
 import "./components/Navbar.css";
-
+import Cards from "./components/Cards";
 
 function App() {
   return (
     <>
+      
       <Router>
-        <Navbar />
-        <Icons />
-        
+
+      <Navbar />
+      <Icons />
+      <Cards />
         {/* <Link>Login</Link>
         <Link>Register</Link>
         <Link>Home</Link> */}

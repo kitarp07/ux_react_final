@@ -4,7 +4,10 @@
     align-items: center;
     padding: 1rem 2rem;
     position: sticky;
-    top: 0;
+    top:0;
+    background-color:white;
+    z-index: 1000;
+    
 }
 
 .navbar-logo{
@@ -118,10 +121,21 @@
 }
 @media only screen and (max-width: 700px) {
     .search,
-    .nav-items,
-    .navbar-logo{
+    .item,
+    .trips{
         display: none;
 
+    }
+
+    .navbar{
+        padding-left: 1rem;
+        padding-right: 1.5rem;
+    }
+
+    .profile-item {
+        position: fixed;
+        top: 6px;
+        right: 7px;
     }
     .bottom-navigation {
         display: block;
@@ -133,5 +147,6 @@
         box-shadow: 0 1px 2px rgb(0 0 0/8%), 0 4px 12px rgb(0, 0, 0/ 5%);
     
     }
+
 
 }
