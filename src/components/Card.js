@@ -6,9 +6,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
+import { useNavigate } from 'react-router-dom';
 function Card() {
+  const navigate = useNavigate()
+
   return (
-    <div className="card">
+    <div className="card" onClick={ ()=> navigate('/trip-detail')}>
       <Swiper
         slidesPerView={1}
         loop={true}

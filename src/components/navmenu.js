@@ -9,7 +9,14 @@ import "./Modal.css";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import { Button as ReactStrapButton, Form, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import {
+  Button as ReactStrapButton,
+  Form,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,6 +24,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "popper.js/dist/popper.min.js";
 import "jquery/dist/jquery.min.js";
+
+import RegisterModal from "./RegModal";
+import LoginModal from "./LoginModal";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,6 +39,8 @@ export default function BasicMenu() {
   };
 
   const [showModal, setShowModal] = useState(false);
+  const [showRegModal, setShowRegModal] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
 
   const openModal = () => {
     setShowModal(true);
@@ -37,6 +49,15 @@ export default function BasicMenu() {
   const closeModal = () => {
     setShowModal(false);
   };
+
+  const openRegModal = () => {
+    setShowRegModal(true);
+  };
+  const openLoginModal = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleLogin = () => {};
 
   return (
     <div>
@@ -78,10 +99,10 @@ export default function BasicMenu() {
         }}
       >
         <MenuItem className="menu-item" onClick={handleClose}>
-          Signup
+        <a onClick={openRegModal}>Signup</a>
         </MenuItem>
         <MenuItem className="menu-item" onClick={handleClose}>
-          <a onClick={openModal}>Login</a>
+          <a onClick={openLoginModal}>Login</a>
         </MenuItem>
         <div
           style={{ height: "1px", backgroundColor: "#ddd", width: "100%" }}
@@ -97,44 +118,9 @@ export default function BasicMenu() {
         </MenuItem>
       </Menu>
 
-      <div>
+      <RegisterModal showRegModal={showRegModal} setShowRegModal={setShowRegModal} />
+      <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />
 
-      <Modal show={showModal} onHide={closeModal} className="customModal">
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="modal-body-text">Welcome to travelhub</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={closeModal}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* <Modal show={showModal} onHide={closeModal} backdrop="static">
-        <Modal.Header closeButton>
-          <Modal.Title>Modal Title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Modal content goes here.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={closeModal}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
-    </div>
-
-      
     </div>
   );
 }

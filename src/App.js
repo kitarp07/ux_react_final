@@ -12,19 +12,21 @@ import Navbar from "./components/Navbar";
 import Icons from "./components/Icons";
 import "./components/Navbar.css";
 import Cards from "./components/Cards";
+import  TripDetail  from "./components/TripDetail";
+import Home from "./components/Home";
 
 function App() {
   return (
     <>
-      
       <Router>
+        
+  
+        <Routes>
+        <Route  path='' element={<Navigate to="/home" replace={true} />}/>
+        <Route path='/trip-detail' element={< TripDetail />} />
+        <Route path='/home' element={< Home />} />
 
-      <Navbar />
-      <Icons />
-      <Cards />
-        {/* <Link>Login</Link>
-        <Link>Register</Link>
-        <Link>Home</Link> */}
+        </Routes>
       </Router>
     </>
   );
