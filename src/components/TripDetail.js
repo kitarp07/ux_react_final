@@ -11,7 +11,9 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { useNavigate } from 'react-router-dom';
 export default function TripDetail() {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
@@ -158,8 +160,8 @@ export default function TripDetail() {
               </div>
             </div>
 
-            <div className="book-button">
-            <ReactStrapButton className="b" color="primary">
+            <div onClick={() => {navigate('/checkout')}} className="book-button">
+            <ReactStrapButton className="b" >
                 Book Now
               </ReactStrapButton>
             </div>

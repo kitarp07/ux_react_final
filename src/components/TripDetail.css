@@ -325,4 +325,5 @@
     height: 40px;
     background: linear-gradient(to right, #ff9966,
     #ff5e62);
+    border-color: #ddd;
 }

@@ -1,0 +1,99 @@
+.checkout{
+    margin-top: 50px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.checkout-wrap{
+    margin-right: 20px;
+    margin-left: 80px;
+    width: 600px;
+    margin-right: 50px;
+    
+
+}
+
+.r-title {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+
+.dates-edit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.t-d{
+    font-size: 18px;
+    font-weight: 600;
+    
+}
+
+.d-1{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.n-1{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.num-edit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+   
+}
+
+.book-details {
+    border-bottom: 1px solid #ddd;
+  
+    height: 220px;
+    width: 620px;
+}
+
+
+.form-wrap{
+    margin-top: 30px;
+}
+
+
+.r-book-card{
+    border:   1px solid rgb(221, 221, 221) !important;
+    border-radius: 12px;
+    padding: 24px;
+    width: 466px;
+    height: 380px;
+    margin-left: 80px ;
+ }
+
+ .item{
+    display: flex;
+    flex-direction: row;
+ }
+.i-img {
+    width: 134px;
+    height: 106px;
+    object-fit: cover;
+    border-radius: 6px;
+
+ } 
+
+ .trip-d {
+    margin-left: 20px;
+ }
+
+ .i-d1{
+    height: 16px;
+    margin-bottom: 9px;
+    font-weight: 400;
+    color: #717171;
+
+ }
