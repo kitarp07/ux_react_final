@@ -6,12 +6,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 function Card() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
-    <div className="card" onClick={ ()=> navigate('/trip-detail')}>
+    <div className="card" >
       <Swiper
         slidesPerView={1}
         loop={true}
@@ -22,11 +22,11 @@ function Card() {
         modules={[Pagination, Navigation]}
         style={{ width: "321px", height: "305px" }}
         className="mySwiper"
-        
       >
         <SwiperSlide>
           {" "}
           <img
+            onClick={() => navigate("/trip-detail")}
             className="card-img"
             src="https://a0.muscache.com/im/pictures/c0b5943a-9c0c-449c-ab3b-cf148b8471c3.jpg?im_w=720"
           />{" "}
@@ -67,8 +67,11 @@ function Card() {
       <div className="card-details">
         <p className="place-name">Cheomdangwahak-ro</p>
         <div className="card-rating">
-          <StarRateRoundedIcon />
-          <div className="rating-num">5.0</div>
+          <div className="star-icon">
+            <StarRateRoundedIcon />
+          </div>
+
+          <div className="c-rating-num">5.0</div>
         </div>
       </div>
       <p className="card-view">Views</p>

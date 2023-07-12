@@ -317,12 +317,16 @@
     justify-content: space-between;
     margin-right: 30px;
     
+    
 }
 
 .b{
     width: 315px;
     height: 40px;
-    background: linear-gradient(to right, #ff9966,
-    #ff5e62);
+    /* background: linear-gradient(to right, #ff9966,
+    #ff5e62); */
+    background: linear-gradient(to right, #11998e,
+    #38ef7d);
     border-color: #ddd;
+    border: none !important;
 }

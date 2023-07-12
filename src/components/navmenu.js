@@ -7,8 +7,7 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import "./Navbar2.css";
 import "./Modal.css";
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
-import { Helmet } from "react-helmet";
+
 import {
   Button as ReactStrapButton,
   Form,
@@ -61,15 +60,7 @@ export default function BasicMenu() {
 
   return (
     <div>
-      {/* <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button> */}
+      
 
       <div
         id="basic-button"

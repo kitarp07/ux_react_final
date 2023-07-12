@@ -14,6 +14,7 @@ export default function Account() {
   const [showEdit, setShowEdit] = useState(true);
   const [showEmailEdit, setShowEmailEdit] = useState(true);
   const [showNumEdit, setShowNumEdit] = useState(true);
+  const [showPasswordEdit, setShowPasswordEdit] = useState(true);
 
   const handleShowEdit = () => {
     setShowEdit(false);
@@ -37,6 +38,14 @@ export default function Account() {
 
   const handleShowNumCancel = () => {
     setShowNumEdit(true);
+  };
+
+  const handleShowPassswordEdit = () => {
+    setShowPasswordEdit(false);
+  };
+
+  const handleShowPasswordCancel = () => {
+    setShowPasswordEdit(true);
   };
   return (
     <div>
@@ -69,187 +78,317 @@ export default function Account() {
           </div>
         </div>
 
-        <div className="personal-details-div">
-          <div className="personal-details">
-            <div className="pdt-div">
-              <p className="pd-title">Personal Details</p>
+        <div>
+          <div className="personal-details-div">
+            <div className="personal-details">
+              <div className="pdt-div">
+                <p className="pd-title">Personal Info</p>
+              </div>
+
+              {showEdit ? (
+                <div className="pd-list-div">
+                  <div className="pd-div-wrap">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Name</p>
+                      </div>
+                      <div className="nv-div">
+                        <p className="name-value"> John Doe</p>
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div onClick={handleShowEdit} className="pd-edit-button">
+                        <p>Edit</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="pd-list-div-f">
+                  <div className="pd-div-wrap-f">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Name</p>
+                      </div>
+                      <div className="profile-edit-form">
+                        <Form>
+                          <FormGroup>
+                            <Input
+                              className="edit-nameInput"
+                              id="email"
+                              name="email"
+                              placeholder="John Doe"
+                              type="text"
+                              // value={username}
+                              // onChange={(e) => setUsername(e.target.value)
+                              // }
+                            />
+                          </FormGroup>
+                          <div className="save-edit-button-div">
+                            <ReactStrapButton
+                              onClick={() => {
+                                // navigate("/register");
+                              }}
+                              className="save-edit-button"
+                              color="secondary"
+                            >
+                              Save
+                            </ReactStrapButton>
+                          </div>
+                        </Form>{" "}
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div
+                        onClick={handleShowCancel}
+                        className="pd-cancel-button"
+                      >
+                        <p>Cancel</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {showEmailEdit ? (
+                <div className="pd-list-div">
+                  <div className="pd-div-wrap">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Email</p>
+                      </div>
+                      <div className="nv-div">
+                        <p className="name-value"> johndoe@gmail.com</p>
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div
+                        onClick={handleShowEmailEdit}
+                        className="pd-edit-button"
+                      >
+                        <p>Edit</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="pd-list-div-f">
+                  <div className="pd-div-wrap-f">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Name</p>
+                      </div>
+                      <div className="profile-edit-form">
+                        <Form>
+                          <FormGroup>
+                            <Input
+                              className="edit-emailInput"
+                              id="email"
+                              name="email"
+                              placeholder="johndoe@gmail.com"
+                              type="text"
+                              // value={username}
+                              // onChange={(e) => setUsername(e.target.value)
+                              // }
+                            />
+                          </FormGroup>
+                          <div className="save-edit-button-div">
+                            <ReactStrapButton
+                              onClick={() => {
+                                // navigate("/register");
+                              }}
+                              className="save-edit-button"
+                              color="secondary"
+                            >
+                              Save
+                            </ReactStrapButton>
+                          </div>
+                        </Form>{" "}
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div
+                        onClick={handleShowEmailCancel}
+                        className="pd-cancel-button"
+                      >
+                        <p>Cancel</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {showNumEdit ? (
+                <div className="pd-list-div">
+                  <div className="pd-div-wrap">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Phone number</p>
+                      </div>
+                      <div className="nv-div">
+                        <p className="name-value"> 9856789012</p>
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div
+                        onClick={handleShowNumEdit}
+                        className="pd-edit-button"
+                      >
+                        <p>Edit</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="pd-list-div-f">
+                  <div className="pd-div-wrap-f">
+                    <div className="pd-name">
+                      <div className="pd-pn-div">
+                        <p className="pd-pn"> Name</p>
+                      </div>
+                      <div className="profile-edit-form">
+                        <Form>
+                          <FormGroup>
+                            <Input
+                              className="edit-contactInput"
+                              id="contact"
+                              name="contact"
+                              placeholder="9856789012"
+                              type="text"
+                              // value={username}
+                              // onChange={(e) => setUsername(e.target.value)
+                              // }
+                            />
+                          </FormGroup>
+                          <div className="save-edit-button-div">
+                            <ReactStrapButton
+                              onClick={() => {
+                                // navigate("/register");
+                              }}
+                              className="save-edit-button"
+                              color="secondary"
+                            >
+                              Save
+                            </ReactStrapButton>
+                          </div>
+                        </Form>{" "}
+                      </div>
+                    </div>
+                    <div className="pd-edit-div">
+                      <div
+                        onClick={handleShowNumCancel}
+                        className="pd-cancel-button"
+                      >
+                        <p>Cancel</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-
-            {showEdit ? (
-              <div className="pd-list-div">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="nv-div">
-                    <p className="name-value"> John Doe</p>
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowEdit} className="pd-edit-button">
-                    <p>Edit</p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="pd-list-div-f">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="profile-edit-form">
-                    <Form>
-                      <FormGroup>
-                        <Input
-                          className="edit-nameInput"
-                          id="email"
-                          name="email"
-                          placeholder="John Doe"
-                          type="text"
-                          // value={username}
-                          // onChange={(e) => setUsername(e.target.value)
-                          // }
-                        />
-                      </FormGroup>
-                      <div className="save-edit-button-div">
-                        <ReactStrapButton
-                          onClick={() => {
-                            // navigate("/register");
-                          }}
-                          className="save-edit-button"
-                          color="secondary"
-                        >
-                          Register
-                        </ReactStrapButton>
-                      </div>
-                    </Form>{" "}
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowCancel} className="pd-cancel-button">
-                    <p>Cancel</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {showEmailEdit ? (
-              <div className="pd-list-div">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="nv-div">
-                    <p className="name-value"> John Doe</p>
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowEmailEdit} className="pd-edit-button">
-                    <p>Edit</p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="pd-list-div-f">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="profile-edit-form">
-                    <Form>
-                      <FormGroup>
-                        <Input
-                          className="edit-nameInput"
-                          id="email"
-                          name="email"
-                          placeholder="John Doe"
-                          type="text"
-                          // value={username}
-                          // onChange={(e) => setUsername(e.target.value)
-                          // }
-                        />
-                      </FormGroup>
-                      <div className="save-edit-button-div">
-                        <ReactStrapButton
-                          onClick={() => {
-                            // navigate("/register");
-                          }}
-                          className="save-edit-button"
-                          color="secondary"
-                        >
-                          Register
-                        </ReactStrapButton>
-                      </div>
-                    </Form>{" "}
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowEmailCancel} className="pd-cancel-button">
-                    <p>Cancel</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {showNumEdit ? (
-              <div className="pd-list-div">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="nv-div">
-                    <p className="name-value"> John Doe</p>
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowNumEdit} className="pd-edit-button">
-                    <p>Edit</p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="pd-list-div-f">
-                <div className="pd-name">
-                  <div className="pd-pn-div">
-                    <p className="pd-pn"> Name</p>
-                  </div>
-                  <div className="profile-edit-form">
-                    <Form>
-                      <FormGroup>
-                        <Input
-                          className="edit-contactInput"
-                          id="contact"
-                          name="contact"
-                          placeholder="9856789012"
-                          type="text"
-                          // value={username}
-                          // onChange={(e) => setUsername(e.target.value)
-                          // }
-                        />
-                      </FormGroup>
-                      <div className="save-edit-button-div">
-                        <ReactStrapButton
-                          onClick={() => {
-                            // navigate("/register");
-                          }}
-                          className="save-edit-button"
-                          color="secondary"
-                        >
-                          Register
-                        </ReactStrapButton>
-                      </div>
-                    </Form>{" "}
-                  </div>
-                </div>
-                <div className="pd-edit-div">
-                  <div onClick={handleShowNumCancel} className="pd-cancel-button">
-                    <p>Cancel</p>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
+      </div>
+
+      <div className="security-div">
+        <div className="security-title-div">
+          <div className="s-c">
+            <p className="sc-title">Password and Security</p>
+          </div>
+        </div>
+        {showPasswordEdit ? (
+          <div className="pd-list-div">
+            <div className="pd-div-wrap">
+              <div className="pd-name">
+                <div className="pd-pn-div">
+                  <p className="pd-pn"> Password</p>
+                </div>
+                <div className="nv-div">
+                  <p className="name-value"> ********</p>
+                </div>
+              </div>
+              <div className="pd-edit-div">
+                <div onClick={handleShowPassswordEdit} className="pd-edit-button">
+                  <p>Update</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="pd-list-div-f">
+            <div className="pd-div-wrap-f-pw">
+              <div className="pd-name">
+                <div className="pd-pn-div">
+                  <p className="pd-pn"> Old Password</p>
+                </div>
+                <div className="profile-edit-form">
+                  <Form>
+                    <FormGroup>
+                      <Input
+                        className="edit-contactInput"
+                        id="old-password"
+                        name="old-password"
+                        placeholder="Enter old password"
+                        type="text"
+                        // value={username}
+                        // onChange={(e) => setUsername(e.target.value)
+                        // }
+                      />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label>
+                            New Password
+                        </Label>
+                      <Input
+                        className="edit-contactInput"
+                        id="new-password"
+                        name="new-password"
+                        placeholder="Enter new password"
+                        type="text"
+                        // value={username}
+                        // onChange={(e) => setUsername(e.target.value)
+                        // }
+                      />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label>
+                            Confirm Password
+                        </Label>
+                      <Input
+                        className="edit-contactInput"
+                        id="confirm-password"
+                        name="confirm-password"
+                        placeholder="Enter new password"
+                        type="text"
+                        // value={username}
+                        // onChange={(e) => setUsername(e.target.value)
+                        // }
+                      />
+                    </FormGroup>
+                    <div className="save-edit-button-div">
+                      <ReactStrapButton
+                        onClick={() => {
+                          // navigate("/register");
+                        }}
+                        className="save-edit-button"
+                        color="secondary"
+                      >
+                        Update
+                      </ReactStrapButton>
+                    </div>
+                  </Form>{" "}
+                </div>
+              </div>
+              <div className="pd-edit-div">
+                <div onClick={handleShowPasswordCancel} className="pd-cancel-button">
+                  <p>Cancel</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

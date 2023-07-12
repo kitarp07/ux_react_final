@@ -28,14 +28,7 @@
 
 }
 
-/* .card-rating {
-    display: flex;
-    margin-top: 5px;
 
-    justify-content: center;
-    
-   
-} */
 
 .place-name{
     font-size: 15px;
@@ -47,11 +40,11 @@
   
 }
 
-/* .rating-num {
-    margin-top: 1.2px;
+.c-rating-num {
+    margin-top: 4px;
     font-family: 'Circular',-apple-system,'BlinkMacSystemFont','Roboto','Helvetica Neue',sans-serif;
    
-} */
+}
 
 .card-view{
     
@@ -81,10 +74,16 @@
 
 
 .card {
-    border: none;
+    border: none !important;
     margin: 1rem;
 }
 
 .card .swiper-pagination-bullet-active {
     /* background-color: white ; */
+}
+
+.card-rating{
+    display: flex;
+    flex-direction: row;
+
 }

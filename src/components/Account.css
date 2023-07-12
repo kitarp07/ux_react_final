@@ -102,27 +102,41 @@
     width: 600px;
     height: 90px;
     padding: 24px;
-    border-bottom: 1px solid #ddd;
     
     justify-content: space-between;
 }
 
 .pd-list-div-f {
-    display: flex;
-    flex-direction: row;
+   
     width: 600px;
-    height: 90px;
+    height: 180px;
     padding: 24px;
    
-    
     justify-content: space-between;
 }
 
-.pd-name{
-    
+.pd-div-wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    height: 66px;
+    width: 550px;
     
     
 }
+
+.pd-div-wrap-f{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    height: 166px;
+    width: 550px;
+    
+    
+}
+
 
 .pd-pn-div {
     height: 25px;
@@ -144,9 +158,9 @@
 .profile-edit-form {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 600px;
-    height: 120px;
-    border-bottom: 1px solid #ddd;
+
+
+    
     
 }
 
@@ -154,6 +168,18 @@
     height: 46px;
     width: 250px;
 }
+
+.edit-emailInput{
+    height: 46px;
+    width: 250px;
+}
+
+
+.edit-contactInput{
+    height: 46px;
+    width: 250px;
+}
+
 
 .save-edit-button-div {
     
@@ -171,4 +197,30 @@
 
 .pd-cancel-button {
     cursor: pointer;
+}
+
+.security-div {
+    margin-left: 540px;
+    margin-top: 30px;
+
+}
+
+.security-title-div {
+    
+}
+
+.sc-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.pd-div-wrap-f-pw{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    height: 340px;
+    width: 550px;
+    
+    
 }

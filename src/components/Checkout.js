@@ -163,7 +163,10 @@ export default function () {
               </div>
 
               <div className="r-book-button">
-                <ReactStrapButton className="rb-1" >
+                {/* <ReactStrapButton className="rb-1" >
+                  Make Reservation
+                </ReactStrapButton> */}
+                <ReactStrapButton className="rb-2" >
                   Make Reservation
                 </ReactStrapButton>
 
