@@ -1,6 +1,6 @@
 .checkout{
     margin-top: 50px;
-    margin-left: 40px;
+    margin-left: 80px;
     display: flex;
     flex-direction: row;
 
@@ -11,6 +11,7 @@
     margin-left: 80px;
     width: 600px;
     margin-right: 50px;
+    margin-top: 0px;
     
 
 }
@@ -25,6 +26,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
 }
 
 .t-d{
@@ -36,11 +38,13 @@
 .d-1{
     font-size: 16px;
     font-weight: 600;
+    height: 16px;
 }
 
 .n-1{
     font-size: 16px;
     font-weight: 600;
+    height: 16px;
 }
 
 
@@ -54,37 +58,58 @@
 
 .book-details {
     border-bottom: 1px solid #ddd;
-  
-    height: 220px;
+    height: 200px;
     width: 620px;
+    margin-top: 40px;
 }
 
 
 .form-wrap{
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 
 .r-book-card{
     border:   1px solid rgb(221, 221, 221) !important;
     border-radius: 12px;
-    padding: 24px;
+    padding: 20px;
     width: 466px;
     height: 380px;
-    margin-left: 80px ;
+    margin-left: 50px ;
+    margin-top: 95px;
+    position:sticky;
+    top: 170px;
  }
+
+  
+
+.r-details{
+   font-size: 20px;
+   font-weight: 500;
+}
 
  .item{
     display: flex;
     flex-direction: row;
  }
+
+ .r-item-card {
+    padding-top: 5px;
+   
+ }
+
 .i-img {
     width: 134px;
     height: 106px;
     object-fit: cover;
     border-radius: 6px;
+    
 
  } 
+
+ .i-img-box {
+    
+ }
 
  .trip-d {
     margin-left: 20px;
@@ -93,7 +118,133 @@
  .i-d1{
     height: 16px;
     margin-bottom: 9px;
-    font-weight: 400;
-    color: #717171;
+   
+ }
+
+ .i-1 {
+    font-size: 16px;
+    font-weight: 500;
+    
+ }
+
+ .i-d2 {
+    margin-top: 12px;
 
  }
+
+ .i-2 {
+    font-size: 12px;
+    line-height: 16px;
+  
+    color: #717171;
+    
+ }
+
+ .r-price-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+ }
+
+ .price-d{
+    font-size: 20px;
+    font-weight: 500;
+    padding-top: 6px;
+ }
+
+ .pd-1 {
+
+ }
+
+ .pd-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0px;
+    padding-bottom: 6px;
+
+ }
+
+ .gp-1 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(34, 34, 34) ;
+ }
+
+ .rd-p{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 3px;
+    justify-content: space-between;
+ }
+
+
+.payment-div {
+  margin-top: 30px;
+
+}
+
+.pw1-d {
+   height: 35px;
+}
+
+.p-w-1 {
+   font-size: 20px;
+   font-weight: 600;
+}
+
+.p-w-2 {
+   font-size: 10px;
+   font-weight: 300;
+   color: #afabab;
+}
+
+.pw2-d{
+   margin-left: 445px;
+}
+
+.pd-wrap {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+ }
+
+ .pay-with {
+   margin-top: 2px;
+ }
+ .khalti {
+   margin-left: 415px;
+   cursor: pointer;
+ }
+ .khalti-icon {
+   height: 50px;
+   width: 100px;
+ }
+
+.img-click {
+   display:  flex;
+   flex-direction: column;
+   
+  
+}
+
+.r-book-button {
+   border-top: 1px solid #ddd;
+   padding: 24px;
+}
+
+.rb-1 {
+   height: 56px;
+   width: 204px;
+   background-color: #3bedb7;
+   font-size: 18px;
+   border: none;
+}
+

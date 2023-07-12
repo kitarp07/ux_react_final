@@ -10,7 +10,12 @@ import {
   Label,
 } from "reactstrap";
 
+import KhaltiCheckout from "khalti-checkout-web";
+import config from "./Khalti/khaltiConfig";
+
 export default function () {
+  let checkout = new KhaltiCheckout(config);
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -127,21 +132,42 @@ export default function () {
                   // }
                 />
               </FormGroup>
+              <div className="payment-div">
+                <div className="pd-wrap">
+                  <div className="pay-with">
+                    <div className="pw1-d">
+                      <p className="p-w-1"> Pay With </p>
+                    </div>
+                  </div>
 
-              <div className="lbuttons">
-                <ReactStrapButton className="button" color="primary">
-                  Login
+                  <div className="img-click">
+                    <div
+                      className="khalti"
+                      onClick={() => {
+                        checkout.show({ amount: 1000 });
+                      }}
+                    >
+                      <img
+                        className="khalti-icon"
+                        src="https://khalti-static.s3.ap-south-1.amazonaws.com/cloudfront-cdn/jamara/web19/images/khalti-logo.svg"
+                      />
+                    </div>
+
+                    <div className="pw2-d">
+                      <p className="p-w-2"> Click to pay </p>
+                    </div>
+                  </div>
+
+                  
+                </div>
+              </div>
+
+              <div className="r-book-button">
+                <ReactStrapButton className="rb-1" >
+                  Make Reservation
                 </ReactStrapButton>
 
-                <ReactStrapButton
-                  onClick={() => {
-                    // navigate("/register");
-                  }}
-                  className="button"
-                  color="secondary"
-                >
-                  Register
-                </ReactStrapButton>
+                
               </div>
             </Form>
           </div>
@@ -152,39 +178,46 @@ export default function () {
           </div>
           <div className="r-item-card">
             <div className="item">
-              <div className="i-img-box"></div>
-              <img
-                className="i-img"
-                src="https://a0.muscache.com/im/pictures/c0b5943a-9c0c-449c-ab3b-cf148b8471c3.jpg?im_w=720"
-              />
+              <div className="i-img-box">
+                <img
+                  className="i-img"
+                  src="https://a0.muscache.com/im/pictures/c0b5943a-9c0c-449c-ab3b-cf148b8471c3.jpg?im_w=720"
+                />
+              </div>
+
               <div className=" trip-d">
                 <div className="i-d1">
-                  <p className="i-1"> Check in</p>
+                  <p className="i-1"> Cheomdangwahak-ro</p>
                 </div>
                 <div className="i-d2">
-                  <p className="i-2">Add Date</p>
+                  <p className="i-2">4 days trip</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="price-div">
-            <div className="guests-price">
-              <p>3 guests x 20$</p>
+          <div className="r-price-div">
+            <div className="pd-1">
+              <p className="price-d">Price Details</p>
             </div>
+            <div className="pd-2">
+              <div className="guests-price">
+                <p className="gp-1">3 guests x 20 Nrs</p>
+              </div>
 
-            <div className="price">
-              <p>60$</p>
+              <div className="price">
+                <p className="gp-1">Nrs 60 </p>
+              </div>
             </div>
           </div>
 
-          <div className="total-price">
-            <div className="tp1">
+          <div className="rd-p">
+            <div className="rd-p-1">
               <p>Total price</p>
             </div>
 
-            <div className="tp2">
-              <p>60$</p>
+            <div className="rd-p-2">
+              <p> NRs 60</p>
             </div>
           </div>
         </div>

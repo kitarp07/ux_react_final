@@ -1,0 +1,174 @@
+.acc-wrap{
+    margin-left: 130px;
+    margin-right: 180px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.acc-title-div{
+    margin-top: 30px;
+    margin-left: 140px;
+    margin-bottom: 20px;
+    
+}
+
+.acc-title {
+    font-size: 30px;
+    line-height: 36px !important;
+    font-weight: 400 ;
+    color: rgb(34, 34, 34) !important;
+}
+
+.profile-card {
+    height: 232px;
+    width: 342px;
+    border-radius: 24px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-right: 24px;
+    padding-left: 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    margin-top: 20px;
+    
+}
+
+.acc-p-circle{
+    width: 292px;
+    height: 166px;
+ 
+    padding: 10px;
+}
+
+.p-img-div{
+    display: flex;
+ 
+    justify-content: center;
+}
+
+.p-img {
+    width: 104px;
+    height: 104px;
+}
+
+.profile-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+
+}
+
+.pnd-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.p-g-d{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+}
+
+.pn1{
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.p-g {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.personal-details-div {
+    margin-left: 70px;
+
+}
+
+.pd-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.pd-list-div {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 90px;
+    padding: 24px;
+    border-bottom: 1px solid #ddd;
+    
+    justify-content: space-between;
+}
+
+.pd-list-div-f {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 90px;
+    padding: 24px;
+   
+    
+    justify-content: space-between;
+}
+
+.pd-name{
+    
+    
+    
+}
+
+.pd-pn-div {
+    height: 25px;
+}
+
+.pd-pn {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: #222222;
+}
+
+.name-value {
+    font-size: 14px;
+    font-weight: 300;
+    color: #717171;
+}
+
+.profile-edit-form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 600px;
+    height: 120px;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.edit-nameInput{
+    height: 46px;
+    width: 250px;
+}
+
+.save-edit-button-div {
+    
+    height: 60px;
+}
+
+.save-edit-button{
+    height: 45px;
+    width: 140px;
+}
+
+.pd-edit-button{
+    cursor: pointer;
+}
+
+.pd-cancel-button {
+    cursor: pointer;
+}
