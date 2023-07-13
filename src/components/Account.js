@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Account.css";
 import Navbar from "./Navbar";
 import { useState } from "react";
@@ -10,11 +10,26 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import userServices from "../services/userServices";
+import { useParams } from "react-router-dom";
+
 export default function Account() {
   const [showEdit, setShowEdit] = useState(true);
   const [showEmailEdit, setShowEmailEdit] = useState(true);
   const [showNumEdit, setShowNumEdit] = useState(true);
   const [showPasswordEdit, setShowPasswordEdit] = useState(true);
+
+  const { id } = useParams();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    userServices.getUser(id).then((res) => {
+      console.log(res.data);
+      setUser(res.data)
+      console.log(user)
+    });
+  }, []);
 
   const handleShowEdit = () => {
     setShowEdit(false);
@@ -67,7 +82,7 @@ export default function Account() {
               </div>
               <div className="profile-name">
                 <div className="pnd-1">
-                  <p className="pn1"> Pratik </p>
+                  <p className="pn1"> {user?.fullname} </p>
                 </div>
 
                 <div className="p-g-d">
@@ -93,7 +108,7 @@ export default function Account() {
                         <p className="pd-pn"> Name</p>
                       </div>
                       <div className="nv-div">
-                        <p className="name-value"> John Doe</p>
+                        <p className="name-value"> {user?.fullname}</p>
                       </div>
                     </div>
                     <div className="pd-edit-div">
@@ -117,7 +132,7 @@ export default function Account() {
                               className="edit-nameInput"
                               id="email"
                               name="email"
-                              placeholder="John Doe"
+                              placeholder={user?.fullname}
                               type="text"
                               // value={username}
                               // onChange={(e) => setUsername(e.target.value)
@@ -158,7 +173,7 @@ export default function Account() {
                         <p className="pd-pn"> Email</p>
                       </div>
                       <div className="nv-div">
-                        <p className="name-value"> johndoe@gmail.com</p>
+                        <p className="name-value"> {user?.email}</p>
                       </div>
                     </div>
                     <div className="pd-edit-div">
@@ -176,7 +191,7 @@ export default function Account() {
                   <div className="pd-div-wrap-f">
                     <div className="pd-name">
                       <div className="pd-pn-div">
-                        <p className="pd-pn"> Name</p>
+                        <p className="pd-pn"> Email</p>
                       </div>
                       <div className="profile-edit-form">
                         <Form>
@@ -185,7 +200,7 @@ export default function Account() {
                               className="edit-emailInput"
                               id="email"
                               name="email"
-                              placeholder="johndoe@gmail.com"
+                              placeholder={user?.email}
                               type="text"
                               // value={username}
                               // onChange={(e) => setUsername(e.target.value)
@@ -226,7 +241,7 @@ export default function Account() {
                         <p className="pd-pn"> Phone number</p>
                       </div>
                       <div className="nv-div">
-                        <p className="name-value"> 9856789012</p>
+                        <p className="name-value"> {user?.contact}</p>
                       </div>
                     </div>
                     <div className="pd-edit-div">
@@ -244,7 +259,7 @@ export default function Account() {
                   <div className="pd-div-wrap-f">
                     <div className="pd-name">
                       <div className="pd-pn-div">
-                        <p className="pd-pn"> Name</p>
+                        <p className="pd-pn"> Contact</p>
                       </div>
                       <div className="profile-edit-form">
                         <Form>
@@ -253,7 +268,7 @@ export default function Account() {
                               className="edit-contactInput"
                               id="contact"
                               name="contact"
-                              placeholder="9856789012"
+                              placeholder={user?.contact}
                               type="text"
                               // value={username}
                               // onChange={(e) => setUsername(e.target.value)
@@ -308,7 +323,10 @@ export default function Account() {
                 </div>
               </div>
               <div className="pd-edit-div">
-                <div onClick={handleShowPassswordEdit} className="pd-edit-button">
+                <div
+                  onClick={handleShowPassswordEdit}
+                  className="pd-edit-button"
+                >
                   <p>Update</p>
                 </div>
               </div>
@@ -337,9 +355,7 @@ export default function Account() {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>
-                            New Password
-                        </Label>
+                      <Label>New Password</Label>
                       <Input
                         className="edit-contactInput"
                         id="new-password"
@@ -353,9 +369,7 @@ export default function Account() {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label>
-                            Confirm Password
-                        </Label>
+                      <Label>Confirm Password</Label>
                       <Input
                         className="edit-contactInput"
                         id="confirm-password"
@@ -382,7 +396,10 @@ export default function Account() {
                 </div>
               </div>
               <div className="pd-edit-div">
-                <div onClick={handleShowPasswordCancel} className="pd-cancel-button">
+                <div
+                  onClick={handleShowPasswordCancel}
+                  className="pd-cancel-button"
+                >
                   <p>Cancel</p>
                 </div>
               </div>

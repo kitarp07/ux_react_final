@@ -7,6 +7,8 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import "./Navbar2.css";
 import "./Modal.css";
 import { useState } from "react";
+import userServices from "../services/userServices";
+
 
 import {
   Button as ReactStrapButton,
@@ -26,8 +28,11 @@ import "jquery/dist/jquery.min.js";
 
 import RegisterModal from "./RegModal";
 import LoginModal from "./LoginModal";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BasicMenu() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -38,8 +43,8 @@ export default function BasicMenu() {
   };
 
   const [showModal, setShowModal] = useState(false);
-  const [showRegModal, setShowRegModal] = useState(false)
-  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showRegModal, setShowRegModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const openModal = () => {
     setShowModal(true);
@@ -58,10 +63,49 @@ export default function BasicMenu() {
 
   const handleLogin = () => {};
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const uid = window.localStorage.getItem("uid");
+    console.log(uid);
+    if (window.localStorage.getItem("uid") != null) {
+      userServices
+        .getUser(window.localStorage.getItem("uid"))
+        .then((res) => {
+          console.log(res);
+          setUser(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const uid = window.localStorage.getItem("uid");
+    const token = window.localStorage.getItem("token");
+
+    if (uid && token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+  
+  const id = window.localStorage.getItem("uid");
+  const handleLogout = (e) => {
+    e.preventDefault();
+    window.localStorage.removeItem("uid");
+    window.localStorage.removeItem("token");
+    setIsLoggedIn(false)
+    window.alert("You have logged out");
+    window.location.reload();
+  };
+
   return (
     <div>
-      
-
       <div
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -89,29 +133,57 @@ export default function BasicMenu() {
           },
         }}
       >
-        <MenuItem className="menu-item" onClick={handleClose}>
-        <a onClick={openRegModal}>Signup</a>
-        </MenuItem>
-        <MenuItem className="menu-item" onClick={handleClose}>
-          <a onClick={openLoginModal}>Login</a>
-        </MenuItem>
-        <div
-          style={{ height: "1px", backgroundColor: "#ddd", width: "100%" }}
-        ></div>
-        <MenuItem className="menu-item" onClick={handleClose}>
-          Find new experiences
-        </MenuItem>
-        <MenuItem className="menu-item" onClick={handleClose}>
-          Help
-        </MenuItem>
-        <MenuItem className="menu-item" onClick={handleClose}>
-          About
-        </MenuItem>
+        {isLoggedIn ? (
+          <div>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              <a onClick={() => {navigate(`/account/${id}`)}}>Account</a>
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              <a onClick={handleLogout}>Logout</a>
+            </MenuItem>
+            <div
+              style={{ height: "1px", backgroundColor: "#ddd", width: "100%" }}
+            ></div>
+
+            <MenuItem className="menu-item" onClick={handleClose}>
+              Find new experiences
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              Help
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              About
+            </MenuItem>
+          </div>
+        ) : (
+          <div>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              <a onClick={openRegModal}>Signup</a>
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              <a onClick={openLoginModal}>Login</a>
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              Find new experiences
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              Help
+            </MenuItem>
+            <MenuItem className="menu-item" onClick={handleClose}>
+              About
+            </MenuItem>
+          </div>
+        )}
       </Menu>
 
-      <RegisterModal showRegModal={showRegModal} setShowRegModal={setShowRegModal} />
-      <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />
-
+      <RegisterModal
+        showRegModal={showRegModal}
+        setShowRegModal={setShowRegModal}
+      />
+      <LoginModal
+        showLoginModal={showLoginModal}
+        setShowLoginModal={setShowLoginModal}
+      />
     </div>
   );
 }

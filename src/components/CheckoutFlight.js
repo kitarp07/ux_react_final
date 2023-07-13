@@ -280,11 +280,11 @@ export default function CheckoutFlight() {
             </div>
             <div className="pd-2">
               <div className="guests-price">
-                <p className="gp-1">{trip?.number_of_Guests} guests</p>
+                <p className="gp-1">{trip?.no_of_passengers} passengers x Nrs {trip?.price} </p>
               </div>
 
               <div className="price">
-                <p className="gp-1">Nrs {trip?.price} </p>
+                <p className="gp-1">Nrs {trip?.price * 5} </p>
               </div>
             </div>
           </div>

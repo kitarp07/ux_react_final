@@ -1,14 +1,10 @@
 .modal-content {
-   height: 600px;
-   width: 600px;
+   height: auto;
+   width: 550px ;
+   padding-bottom: 30px;
 
 }
 
-.modal-content-r {
-   height: 800px;
-   width: 600px;
-
-}
 
 .modal-title {
    padding-left: 180px;
@@ -26,14 +22,7 @@
    
 }
 
-.lbuttons {
-   display: flex;
-   flex-direction: row;
-   gap: 50px;
-   justify-content: center;
-   margin-top: 50px !important ;
-   border: none;
-}
+
 
 .lbuttons-r {
    display: flex;
@@ -44,12 +33,7 @@
    border: none;
 }
 
-.lp-l-b {
-   border: none;
-   
-   
-   
-}
+
 
 .name {
    font-weight: 600;
@@ -65,13 +49,7 @@
    font-weight: 600;
 }
 
-.button-ll {
-   height: 46px;
-   width: 120px;
-   background: linear-gradient(to right, #11998e,
-    #38ef7d);
-   border: none !important;
-}
+
 
 .button-rr {
    height: 46px;
@@ -81,11 +59,7 @@
     border: none !important;
 }
 
-.btnns-wrapp{
-   display: flex;
-   flex-direction: column;
-  
-}
+
 
 .orca {
    margin-top: 20px;

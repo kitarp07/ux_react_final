@@ -30,11 +30,32 @@ import { Height } from "@mui/icons-material";
 
 // import userServices from '../services/userServices';
 
-export default function Navbar() {
+import { DatePicker, Space } from "antd";
 
+export default function Navbar() {
   const navigate = useNavigate();
   const baseUrl = "http://localhost:3000/";
   // const[user, setUser] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = () => {
+    setShowSearch(true);
+  };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      // Perform the desired actions after the specified delay
+      setShowSearch(false);
+      console.log("Delayed action");
+    }, 200);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
 
   const handleLogout = (e) => {
     // e.preventDefault();
@@ -82,38 +103,62 @@ export default function Navbar() {
       />
 
       <div>
-        <div
-          
-          className="search"
-        >
-          <div className="sd-1 ">
-            <div className="sd-dd ">Where to</div>
-            <div className="sd-dd-2">Search destination</div>
-          </div>
+        <Form>
+          <div className="search">
+            {showSearch ? (
+              <>
+                {" "}
+                <div onClick={handleSearch} className="sd-1 ">
+                  <FormGroup>
+                    <Input
+                      className="searchsInput"
+                      id="searchs"
+                      name="searchs"
+                      placeholder=""
+                      type="text"
+                      onChange={(e) => setSearchText(e.target.value)}
+                    />
+                  </FormGroup>
+                </div>
+              </>
+            ) : (
+              <>
+                <div onClick={handleSearch} className="sd-1 ">
+                  <div className="sd-dd ">Where to</div>
 
-          <div className="sd-1-1">
-            <div className="sd-dd">Dates</div>
-            <div className="sd-dd-2">Add Dates</div>
-          </div>
+                  <div className="sd-dd-2">Search destination</div>
+                </div>
+              </>
+            )}
 
-          <div className="search-item3">Click to Search</div>
-          <div className="search-icon-container">
-            <svg
-              className="search-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              aria-hidden="true"
-              role="presentation"
-              focusable="false"
-            >
-              <path
-                fill="none"
-                d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"
-              ></path>
-            </svg>
+            <div className="sd-1-1">
+              <div className="">
+                {" "}
+                <Space direction="vertical">
+                  <DatePicker className="date-pik" onChange={onChange} />
+                </Space>
+              </div>
+              {/* <div className="sd-dd-2">Add Dates</div> */}
+            </div>
+
+            <div className="search-item3">Click to Search</div>
+            <div className="search-icon-container">
+              <svg
+                className="search-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+                role="presentation"
+                focusable="false"
+              >
+                <path
+                  fill="none"
+                  d="M13 24a11 11 0 1 0 0-22 11 11 0 0 0 0 22zm8-3 9 9"
+                ></path>
+              </svg>
+            </div>
           </div>
-        </div>
-        
+        </Form>
       </div>
       <div className="nav-items">
         <div

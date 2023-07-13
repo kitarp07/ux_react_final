@@ -9,10 +9,42 @@ import {
   Label,
 } from "reactstrap";
 import { Modal } from "react-bootstrap";
-import "./ModalR.css";
+import "./Modal.css";
+import userServices from "../services/userServices";
+import { Button, message as antdmessage } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterModal({ showRegModal, setShowRegModal }) {
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
+
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    userServices.register({ name, contact, email, password })
+      .then((res) => {
+        console.log(res.data);
+        window.alert("User registered successfully. Go to Login.");
+        closeModal()
+        
+      })
+      .catch((err) => window.alert(err.response.data.err));
+  };
+
+  const [messageApi, contextHolder] = antdmessage.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content:
+        "This is a prompt message for success, and it will disappear in 10 seconds",
+      duration: 10,
+    });
+  };
 
   const openModal = () => {
     setShowModal(true);
@@ -25,14 +57,18 @@ export default function RegisterModal({ showRegModal, setShowRegModal }) {
   const handleLogin = () => {};
   return (
     <div>
-      <Modal show={showRegModal} onHide={closeModal} className="customModal modal-content-r">
+      <Modal
+        show={showRegModal}
+        onHide={closeModal}
+        className="customModal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Register</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p className="modal-body-text">Welcome to TravelHub</p>
-          <Form onSubmit={handleLogin}>
-          <FormGroup>
+          <Form >
+            <FormGroup>
               <Label className="name" for="name">
                 Name
               </Label>
@@ -42,8 +78,7 @@ export default function RegisterModal({ showRegModal, setShowRegModal }) {
                 name="name"
                 placeholder="Enter name"
                 type="text"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
@@ -56,8 +91,7 @@ export default function RegisterModal({ showRegModal, setShowRegModal }) {
                 name="contact"
                 placeholder="Enter phone number"
                 type="text"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setContact(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
@@ -70,9 +104,7 @@ export default function RegisterModal({ showRegModal, setShowRegModal }) {
                 name="email"
                 placeholder="Enter email"
                 type="text"
-                // value={username}
-                // onChange={(e) => setUsername(e.target.value)
-                // }
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FormGroup>
 
@@ -86,15 +118,12 @@ export default function RegisterModal({ showRegModal, setShowRegModal }) {
                 name="password"
                 placeholder="Enter password"
                 type="password"
-                // value={password}
-                // onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
             <div className="lbuttons-r">
               <ReactStrapButton
-                onClick={() => {
-                  // navigate("/register");
-                }}
+                onClick={handleRegister}
                 className="button-rr"
                 color="secondary"
               >
