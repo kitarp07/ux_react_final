@@ -116,8 +116,8 @@
  }
 
  .i-d1{
-    height: 16px;
-    margin-bottom: 9px;
+   overflow-y: auto;
+   margin-bottom: 0px;
    
  }
 
@@ -128,7 +128,8 @@
  }
 
  .i-d2 {
-    margin-top: 12px;
+    margin-top: 0px;
+   
 
  }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./Checkout.css";
 import {
@@ -12,6 +12,8 @@ import {
 
 import KhaltiCheckout from "khalti-checkout-web";
 import config from "./Khalti/khaltiConfig";
+import { useNavigate, useParams } from "react-router-dom";
+import tripServices from "../services/tripServices";
 
 export default function () {
   let checkout = new KhaltiCheckout(config);
@@ -22,6 +24,65 @@ export default function () {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  console.log("productId:", id);
+
+  const [trip, setTrip] = useState([]);
+  useEffect(() => {
+    tripServices
+      .getTripById(id)
+      .then((res) => {
+        console.log(res.data);
+        setTrip(res.data);
+      })
+      .catch((err) => console.log(err));
+  });
+
+  const baseUrl = "http://localhost:3001";
+
+  const imagess = trip.img;
+
+  const [formattedDate, setFormattedDate] = useState("");
+  const [formattedDate2, setFormattedDate2] = useState("");
+  const [differenceInDays, setDifferenceInDays] = useState(0);
+
+  useEffect(() => {
+    if (trip && trip.startDate) {
+      const startDate = trip.startDate;
+      const [year, month, day] = startDate.split("/");
+      const date = new Date(year, month - 1, day);
+      const fd1 = date.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+      });
+
+      setFormattedDate(fd1);
+    }
+
+    if (trip && trip.endDate) {
+      const endDate = trip.endDate;
+      const [year2, month2, day2] = endDate.split("/");
+      const date2 = new Date(year2, month2 - 1, day2);
+      const fd2 = date2.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+      });
+
+      setFormattedDate2(fd2);
+
+      const differenceInMs = date2 - new Date(formattedDate);
+      const calculatedDifferenceInDays = Math.floor(
+        differenceInMs / (1000 * 60 * 60 * 24)
+      );
+      setDifferenceInDays(calculatedDifferenceInDays);
+    }
+   
+  }, [trip]);
+
+  // Rest of your component code
 
   return (
     <div>
@@ -38,7 +99,9 @@ export default function () {
             <div className="dates-edit">
               <div className="dates">
                 <p className="d-1">Dates</p>
-                <p className="d-2">August 10-20</p>
+                <p className="d-2">
+                  {formattedDate} - {formattedDate2}
+                </p>
               </div>
               <div className="d-edit">
                 <a>Edit</a>
@@ -48,7 +111,7 @@ export default function () {
             <div className="num-edit">
               <div className="num-p">
                 <p className="n-1">Number of Participants</p>
-                <p className="n-2">3 participants</p>
+                <p className="n-2">{trip?.numberOfPassengers} participants</p>
               </div>
               <div className="n-edit">
                 <a>Edit</a>
@@ -157,8 +220,6 @@ export default function () {
                       <p className="p-w-2"> Click to pay </p>
                     </div>
                   </div>
-
-                  
                 </div>
               </div>
 
@@ -166,11 +227,9 @@ export default function () {
                 {/* <ReactStrapButton className="rb-1" >
                   Make Reservation
                 </ReactStrapButton> */}
-                <ReactStrapButton className="rb-2" >
+                <ReactStrapButton className="rb-2">
                   Make Reservation
                 </ReactStrapButton>
-
-                
               </div>
             </Form>
           </div>
@@ -181,19 +240,22 @@ export default function () {
           </div>
           <div className="r-item-card">
             <div className="item">
-              <div className="i-img-box">
-                <img
-                  className="i-img"
-                  src="https://a0.muscache.com/im/pictures/c0b5943a-9c0c-449c-ab3b-cf148b8471c3.jpg?im_w=720"
-                />
-              </div>
+              {trip && Array.isArray(trip.img) && trip.img.length > 0 ? (
+                <>
+                  <div className="i-img-box">
+                    <img className="i-img" src={`${baseUrl}/${trip.img[0]}`} />
+                  </div>
+                </>
+              ) : (
+                <p>No images available.</p>
+              )}
 
               <div className=" trip-d">
                 <div className="i-d1">
-                  <p className="i-1"> Cheomdangwahak-ro</p>
+                  <p className="i-1"> {trip?.title}</p>
                 </div>
                 <div className="i-d2">
-                  <p className="i-2">4 days trip</p>
+                  <p className="i-2">{differenceInDays} days trip</p>
                 </div>
               </div>
             </div>

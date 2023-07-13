@@ -22,12 +22,11 @@ function App() {
     <>
       <Router>
         
-  
         <Routes>
         <Route  path='' element={<Navigate to="/home" replace={true} />}/>
-        <Route path='/trip-detail' element={< TripDetail />} />
+        <Route path='/trip-detail/:id' element={< TripDetail />} />
         <Route path='/home' element={< Home />} />
-        <Route path='/checkout' element={<Checkout/>}/>
+        <Route path='/checkout/trip/:id' element={<Checkout/>}/>
         <Route path='/khalti' element={<Khalti/>}/>
         <Route path='/account' element={<Account/>}/>
 

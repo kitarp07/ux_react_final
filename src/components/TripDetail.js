@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./TripDetail.css";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
@@ -11,9 +11,51 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+
+import tripServices from "../services/tripServices";
 export default function TripDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+
+  console.log('productId:', id);
+
+
+  const [trip, setTrip] = useState([]);
+
+  const [isTrip, setIsTrip] = useState(false)
+
+
+  useEffect(()=> {
+
+    tripServices.getTripById(id).then((res)=>{
+      console.log(res.data)
+      setTrip(res.data)
+      
+    }).catch((err)=> console.log(err))
+  })
+
+  
+  
+
+  console.log(trip)
+  console.log(trip.img)
+
+  
+
+  
+  const baseUrl = "http://localhost:3001";
+
+  const imagess = trip.img
+  
+  
+  
+ 
+
+
+
   return (
     <div>
       <Navbar />
@@ -21,41 +63,44 @@ export default function TripDetail() {
       <div className="trip-div">
         <div className="tripWrap">
           <div className="trip-title">
-            <p className="title">Cheomdangwahak-ro</p>
+            <p className="title">{trip?.title}</p>
           </div>
           <div className="title-details">
             <StarRateRoundedIcon />
             <p className="rating-num">5.0</p>
 
-            <p className="details">Location</p>
+            <p className="details">{trip?.destination}</p>
           </div>
         </div>
 
+        {}
+
         <div className="trip-images">
-          <div>
-            <img
-              className="trip-img"
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-837315422629442025/original/dd6e35a7-eeaa-4144-8c66-b05936ba1c77.jpeg?im_w=720"
-            />
-          </div>
-          <div className="img-grid">
-            <img
-              className="grid-img"
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-837315422629442025/original/dd6e35a7-eeaa-4144-8c66-b05936ba1c77.jpeg?im_w=720"
-            />
-            <img
-              className="grid-img"
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-837315422629442025/original/dd6e35a7-eeaa-4144-8c66-b05936ba1c77.jpeg?im_w=720"
-            />
-            <img
-              className="grid-img"
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-837315422629442025/original/dd6e35a7-eeaa-4144-8c66-b05936ba1c77.jpeg?im_w=720"
-            />
-            <img
-              className="grid-img"
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-837315422629442025/original/dd6e35a7-eeaa-4144-8c66-b05936ba1c77.jpeg?im_w=720"
-            />
-          </div>
+
+        {trip && Array.isArray(trip.img) && trip.img.length > 0  ? (
+        <><div>
+              <img
+                className="trip-img"
+                src={`${baseUrl}/${trip.img[0]}`}
+                alt="" />
+            </div><div className="img-grid">
+                <img
+                  className="grid-img"
+                  src={`${baseUrl}/${trip.img[1]}`} />
+                <img
+                  className="grid-img"
+                  src={`${baseUrl}/${trip.img[2]}`} />
+                <img
+                  className="grid-img"
+                  src={`${baseUrl}/${trip.img[3]}`} />
+                <img
+                  className="grid-img"
+                  src={`${baseUrl}/${trip.img[4]}`} />
+              </div></>
+      ) : (
+        <p>No images available.</p>
+      )}
+         
         </div>
 
         <div className="below-details">
@@ -69,16 +114,9 @@ export default function TripDetail() {
               <p className="info-2-d">1 bath</p>
             </div>
             <div className="about">
-              <p className="about-title">About this space</p>
+              <p className="about-title">About this trip</p>
               <p className="about-info">
-                A house in the heart of the Himalayas, away from the hustle of
-                the city. Enjoy a serene view of the valley surrounded by plum,
-                apple, persimmon and other trees. A peaceful location which is
-                perfect for a relaxing vacation or work-ation. Wake up to an
-                amazing view of the mountains, enjoy a relaxing day reading a
-                book in the balcony, or explore the many nearby sites and
-                adventure activities; This location offers something for
-                everyone.
+               {trip?.description}
               </p>
             </div>
             <div className="offers">
@@ -92,9 +130,7 @@ export default function TripDetail() {
             <div className="itinerary">
               <p className="itinerary-title">Itinerary</p>
               <p className="itinerary-info">
-                We will pick you up at your hotel/accommodation in Chiang Mai
-                city, and take you to a local market for a brief visit before
-                continuing to drive to Smile Organic Farm Cooking School.
+                  {trip?.itinerary}
                 <br />
                 On arrival, we will explain the menu we provide and you can
                 choose your own menu for cooking in each category. After that,
@@ -160,10 +196,13 @@ export default function TripDetail() {
               </div>
             </div>
 
-            <div onClick={() => {navigate('/checkout')}} className="book-button">
-            <ReactStrapButton className="b" >
-                Book Now
-              </ReactStrapButton>
+            <div
+              onClick={() => {
+                navigate(`/checkout/trip/${id}`);
+              }}
+              className="book-button"
+            >
+              <ReactStrapButton className="b">Book Now</ReactStrapButton>
             </div>
           </div>
         </div>
