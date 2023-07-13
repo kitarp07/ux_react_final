@@ -14,8 +14,9 @@ import KhaltiCheckout from "khalti-checkout-web";
 import config from "./Khalti/khaltiConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import tripServices from "../services/tripServices";
+import accommodationServices from "../services/accommodationServices";
 
-export default function Checkout () {
+export default function CheckoutStay () {
   let checkout = new KhaltiCheckout(config);
 
   const onFinish = (values) => {
@@ -32,7 +33,7 @@ export default function Checkout () {
 
   const [trip, setTrip] = useState([]);
   useEffect(() => {
-    tripServices.getTripById(id)
+    accommodationServices.getStayById(id)
       .then((res) => {
         console.log(res.data);
         setTrip(res.data);
@@ -50,8 +51,8 @@ export default function Checkout () {
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
-    if (trip && trip.startDate) {
-      const startDate = trip.startDate;
+    if (trip && trip.checkInDate) {
+      const startDate = trip.checkInDate;
       const [year, month, day] = startDate.split("/");
       const date = new Date(year, month - 1, day);
       const fd1 = date.toLocaleDateString(undefined, {
@@ -62,8 +63,8 @@ export default function Checkout () {
       setFormattedDate(fd1);
     }
 
-    if (trip && trip.endDate) {
-      const endDate = trip.endDate;
+    if (trip && trip.checkOutDate) {
+      const endDate = trip.checkOutDate;
       const [year2, month2, day2] = endDate.split("/");
       const date2 = new Date(year2, month2 - 1, day2);
       const fd2 = date2.toLocaleDateString(undefined, {
@@ -120,7 +121,7 @@ export default function Checkout () {
             <div className="num-edit">
               <div className="num-p">
                 <p className="n-1">Number of Participants</p>
-                <p className="n-2">{trip?.numberOfPassengers} participants</p>
+                <p className="n-2">{trip?.numberOfGuests} participants</p>
               </div>
               <div className="n-edit">
                 <a>Edit</a>
@@ -261,7 +262,7 @@ export default function Checkout () {
 
               <div className=" trip-d">
                 <div className="i-d1">
-                  <p className="i-1"> {trip?.title}</p>
+                  <p className="i-1"> {trip?.name}</p>
                 </div>
                 <div className="i-d2">
                   <p className="i-2">{differenceInDays} days trip</p>
@@ -276,7 +277,7 @@ export default function Checkout () {
             </div>
             <div className="pd-2">
               <div className="guests-price">
-                <p className="gp-1">{trip?.numberOfPassengers} guests x 20 Nrs</p>
+                <p className="gp-1">{trip?.numberOfGuests} guests</p>
               </div>
 
               <div className="price">

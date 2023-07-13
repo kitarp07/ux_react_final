@@ -1,0 +1,173 @@
+.fc-back {
+    
+    margin-top: 10px;
+    padding: 20px;
+
+    
+    
+    
+}
+
+.fc-topbar {
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);;
+   
+
+}
+
+.origin-input {
+    background: #fff;
+    
+}
+
+.fc-dates{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.fc-search {
+    margin-bottom: 10px;
+
+}
+
+.from-to-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flight-icon {
+    height: 34px;
+    width: 34px;
+    margin-bottom: 15px ;
+}
+
+.fc-below-bar {
+    margin-top: 10px;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.04);;
+   
+
+}
+
+.fc-b-content {
+    
+    width: 1040px;
+
+
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.a-i-div{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+}
+
+.fc-flight-img {
+    height: 14px;
+    width: 14px;
+    margin-bottom: 20px;
+    
+}
+
+.fc-flight-icon{
+    height: 38px;
+    width: 38px;
+    object-fit: cover;
+    margin-right: 15px ;
+    
+}
+
+
+.fc-airline {
+    display: flex;
+   flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 0px;
+
+}
+
+.fc-a-name{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.from-to-div-r {
+    display: flex;
+   flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+
+}
+
+.fc-dates-r{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.fc-o{
+    height: 22px;
+}
+
+.fc-o-p{
+    font-size: 16px;
+    font-weight: 600;
+    
+
+}
+
+
+
+.fc-dd-d{
+    font-size: 16px;
+    font-weight: 500;
+    color: #717171;
+    
+}
+
+.fc-price{
+    margin-top: 15px;
+}
+
+.fc-p-c{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.line {
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+    flex-basis: 80px;
+   
+  }
+

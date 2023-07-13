@@ -7,8 +7,8 @@ import { icons } from "../assets/icons";
 
 const images = [trips, flight, stays];
 
-export default function Icons() {
-  const [selectedFilter, setSelectedFilter] = useState();
+export default function Icons({selectedFilter, setSelectedFilter}) {
+  
   return (
     <div className="icons">
       <div

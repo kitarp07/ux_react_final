@@ -15,7 +15,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import tripServices from "../services/tripServices";
-export default function TripDetail() {
+import accommodationServices from "../services/accommodationServices";
+export default function StayDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -30,7 +31,7 @@ export default function TripDetail() {
 
   useEffect(()=> {
 
-    tripServices.getTripById(id).then((res)=>{
+    accommodationServices.getStayById(id).then((res)=>{
       console.log(res.data)
       setTrip(res.data)
       
@@ -38,22 +39,9 @@ export default function TripDetail() {
   }, [id])
 
   
-  
-
-  console.log(trip)
-  console.log(trip.img)
-
-  
 
   
   const baseUrl = "http://localhost:3001";
-
-  const imagess = trip.img
-  
-  
-  
- 
-
 
 
   return (
@@ -63,13 +51,13 @@ export default function TripDetail() {
       <div className="trip-div">
         <div className="tripWrap">
           <div className="trip-title">
-            <p className="title">{trip?.title}</p>
+            <p className="title">{trip?.name}</p>
           </div>
           <div className="title-details">
             <StarRateRoundedIcon />
             <p className="rating-num">5.0</p>
 
-            <p className="details">{trip?.destination}</p>
+            <p className="details">{trip?.location}</p>
           </div>
         </div>
 
@@ -128,22 +116,10 @@ export default function TripDetail() {
               </div>
             </div>
             <div className="itinerary">
-              <p className="itinerary-title">Itinerary</p>
+              <p className="itinerary-title">Info</p>
               <p className="itinerary-info">
-                  {trip?.itinerary}
-                <br />
-                On arrival, we will explain the menu we provide and you can
-                choose your own menu for cooking in each category. After that,
-                you will learn about Thai herbs and vegetables in our organic
-                kitchen garden, and following by cooking activities. You will
-                learn basic Thai cooking in 5 categories; Curry Paste, Curry,
-                Stir-Fried, Soup, and Spring Roll.
-                <br />
-                Every menu is able to cook as vegetarian or vegan. You can
-                decide to make your food spicy or mild. Next, you will enjoy
-                yummy Thai food you cook yourself in our relaxing atmosphere.
-                Finally, we will take you back to your hotel/accommodation in
-                Chiang Mai city.
+                  {trip?.info}
+               
               </p>
             </div>
           </div>
@@ -178,11 +154,11 @@ export default function TripDetail() {
 
             <div className="price-div">
               <div className="guests-price">
-                <p>3 guests x 20$</p>
+                <p>{trip?.numberOfGuests} guests</p>
               </div>
 
               <div className="price">
-                <p>60$</p>
+                <p>{trip?.price} Nrs</p>
               </div>
             </div>
 
@@ -192,13 +168,13 @@ export default function TripDetail() {
               </div>
 
               <div className="tp2">
-                <p>60$</p>
+                <p>{trip?.price} Nrs</p>
               </div>
             </div>
 
             <div
               onClick={() => {
-                navigate(`/checkout/trip/${id}`);
+                navigate(`/checkout/stays/${id}`);
               }}
               className="book-button"
             >
