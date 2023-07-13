@@ -43,4 +43,8 @@
   button[type="submit"] {
     padding: 10px 20px;
   }
+
+  lp-l-b {
+    margin-left: 20px;
+  }
   

@@ -1,10 +1,20 @@
 .fc-back {
+    margin-top: 2px;
     
-    margin-top: 10px;
-    padding: 20px;
+}
 
+.fc-back-t {
+    margin-top: 10px;
+    padding-left: 226px;
+    padding-right: 226px;
     
-    
+}
+
+.fc-back-mb {
+    margin-top: 10px;
+    padding-left: 226px;
+    padding-right: 226px;
+    margin-bottom: 0px;
     
 }
 
@@ -64,6 +74,24 @@
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.04);;
+  
+   
+
+}
+
+.fc-below-bar-mb {
+    margin-top: 10px;
+    display:  flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.04);;
+  
    
 
 }
@@ -77,6 +105,20 @@
     flex-direction: row;
     
     justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.fc-b-content-mb {
+    
+    width: 1040px;
+
+
+    display: flex;
+    flex-direction: row;
+    
+
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
@@ -127,11 +169,28 @@
 
 }
 
+.from-to-div-r-mb {
+    display: flex;
+   flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 152px;
+
+}
+
 .fc-dates-r{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 15px;
+}
+
+.fc-dates-r-mb{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 117px;
 }
 
 .fc-o{
@@ -158,6 +217,11 @@
     margin-top: 15px;
 }
 
+.fc-price-mb{
+    margin-top: 15px;
+    margin-left: 120px;
+}
+
 .fc-p-c{
     font-size: 16px;
     font-weight: 600;
@@ -170,4 +234,18 @@
     flex-basis: 80px;
    
   }
+
+  .line-mb {
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+    flex-basis: 80px;
+    margin-left: 103px;
+   
+  }
+
+  .fc-btn-div-mb{
+    margin-left: 125px;
+  }
+
 

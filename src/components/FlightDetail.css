@@ -1,0 +1,342 @@
+.trip-div {
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+   
+    
+}
+
+.tripWrap{
+    display: flex;
+    flex-direction: column;
+   
+    
+    
+
+}
+.trip-title{
+    height: 26px;
+    margin-bottom:10px ;
+    margin-left: 4px;
+}
+.title{
+    font-size: 26px;
+    
+}
+
+.title-details {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.details{
+    margin-top: 0.1px;
+    padding-left: 7px;
+    font-size: 17px;
+}
+
+.rating-num{
+    margin-top: 0.1px;
+    font-size: 17px;
+}
+
+.trip-images{
+    display: flex;
+    flex-direction: row;
+    
+}
+.trip-img{
+    width: 560px;
+    height: 388px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin-left: 10px;
+}
+.grid-img {
+    border-radius: 3px;
+    width: 272px;
+    height: 188.9px;
+    
+}
+
+.below-details {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.trip-info {
+    margin-top: 20px;
+    
+    width: 600px;
+}
+
+.info-1 {
+    height: 25px;
+    margin-bottom: 15px;
+}
+.info-1-title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.info-2 {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+}
+.info-2-d {
+    margin-left: 5px;
+
+    
+}
+
+
+
+.about {
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.about-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.about-info {
+    font-size: 16px;
+
+    
+}
+
+.offers {
+    margin-top: 20px;
+}
+
+.offers-title {
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+.offer-div {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ddd;
+}
+
+.offer{
+    font-weight: 450;
+}
+
+.itinerary {
+    margin-top: 20px;
+    
+}
+
+.itinerary-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.book-card {
+    margin-left: 30px;
+    margin-top: 50px;
+    width: 375px;
+    height: 350px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+   
+
+    
+ 
+}
+
+.book-card-title {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.booking-dates {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.check-in {
+    margin-left: 30px;
+    border: 1px solid #a5a3a3;
+    height: 56px;
+    width: 140px;
+    border-radius: 4px;
+}
+
+.check-out {
+    border: 1px solid #a5a3a3;
+    height: 56px;
+    width: 140px;
+    border-radius: 4px;
+    
+}
+
+.ci {
+    padding-left: 5px;
+    padding-top: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1px;
+   
+}
+.co {
+    padding-left: 5px;
+    padding-top: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 1px;
+}
+
+.ci2 {
+    padding-left: 7px;
+    padding-top: 4px;
+    font-size: 13px;
+    color: #717171;
+    
+    
+    
+}
+
+.co2 {
+    padding-left: 7px;
+    padding-top: 4px;
+    font-size: 13px;
+    color: #717171;
+    
+    
+    
+}
+
+.guests-div{
+    margin-top: 10px;
+    width: 310px;
+    margin-left: 30px;
+    border-radius: 4px;
+    border: 1px solid #a5a3a3;
+    height: 56px;
+}
+
+.cg {
+    padding-left: 5px;
+    padding-top: 4px;
+}
+.g1 {
+    margin-bottom: 1px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.g2 {
+    font-size: 14px;
+}
+
+.num {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.down-icon {
+    margin-top: 13px;
+    margin-right: 5px;
+    height: 25px !important;
+    width: 25px !important;
+
+}
+
+.price-div {
+    margin-top: 15px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30px;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.guests-price {
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.price {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.total-price {
+    margin-top: 15px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30px;
+    
+
+}
+
+.tp1{
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.tp2 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.book-button {
+    margin-top: 15px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30px;
+    
+    
+}
+
+.b{
+    width: 315px;
+    height: 40px;
+    /* background: linear-gradient(to right, #ff9966,
+    #ff5e62); */
+    background: linear-gradient(to right, #11998e,
+    #38ef7d);
+    border-color: #ddd;
+    border: none !important;
+}
+
+.dep-div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.dep-icon {
+    font-weight: 600;
+}

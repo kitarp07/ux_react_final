@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Cards.css";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,33 +10,46 @@ import { useNavigate } from "react-router-dom";
 function Card({ trip }) {
   const navigate = useNavigate();
 
-  const startDate = trip.startDate;
-  const [year, month, day] = startDate.split("/");
-  // Create a new Date object using the extracted values
-  const date = new Date(year, month - 1, day);
-  // Format the date to display only month and day
-  const formattedDate = date.toLocaleDateString(undefined, {
-    month: "long",
-    day: "numeric",
-  });
+  const [formattedDate, setFormattedDate] = useState("");
+  const [formattedDate2, setFormattedDate2] = useState("");
 
-  const endDate = trip.startDate;
-  const [year2, month2, day2] = endDate.split("/");
+  useEffect(() => {
+    if (trip && trip.startDate) {
+      const startDate = trip.startDate;
+      const [year, month, day] = startDate.split("/");
+      // Create a new Date object using the extracted values
+      const date = new Date(year, month - 1, day);
+      // Format the date to display only month and day
+      const formattedDate = date.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+      });
 
-  // Create a new Date object using the extracted values
-  const date2 = new Date(year2, month2 - 1, day2);
+      setFormattedDate(formattedDate);
+    }
 
-  // Format the date to display only month and day
-  const formattedDate2 = date2.toLocaleDateString(undefined, {
-    month: "long",
-    day: "numeric",
+    if (trip && trip.endDate) {
+      const endDate = trip.endDate;
+      const [year2, month2, day2] = endDate.split("/");
+
+      // Create a new Date object using the extracted values
+      const date2 = new Date(year2, month2 - 1, day2);
+
+      // Format the date to display only month and day
+      const formattedDate2 = date2.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+      });
+
+      setFormattedDate2(formattedDate2);
+    }
   });
 
   const imagess = trip.img;
 
   const baseUrl = "http://localhost:3001";
 
-  const id = trip._id
+  const id = trip._id;
 
   return (
     <div className="card">
@@ -56,7 +69,6 @@ function Card({ trip }) {
             <SwiperSlide>
               {" "}
               <img
-                
                 className="card-img"
                 src={`${baseUrl}/${img}`}
                 alt={`Slide ${index + 1}`}
@@ -98,7 +110,10 @@ function Card({ trip }) {
         </SwiperSlide> */}
       </Swiper>
 
-      <div className="card-details" onClick={() => navigate(`/trip-detail/${id}`)}>
+      <div
+        className="card-details"
+        onClick={() => navigate(`/trip-detail/${id}`)}
+      >
         <p className="place-name">{trip.title}</p>
         <div className="card-rating">
           <div className="star-icon">

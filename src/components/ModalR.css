@@ -1,0 +1,136 @@
+.modal-content {
+    height: 700px;
+    width: 560px;
+ 
+ }
+ 
+ 
+ .modal-title {
+    padding-left: 180px;
+  
+ }
+ 
+ .modal-title.h4{
+    font-size: 16px;
+    
+ }
+ 
+ .modal-body-text{
+    font-size: 20px ;
+    font-weight: 600;
+    
+ }
+ 
+ .lbuttons {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 50px !important ;
+    border: none;
+ }
+ 
+ .lbuttons-r {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 50px !important ;
+    border: none;
+ }
+ 
+ .lp-l-b {
+    border: none;
+    
+    
+    
+ }
+ 
+ .name {
+    font-weight: 600;
+    
+ }
+ .contact {
+    font-weight: 600;
+    
+ }
+ 
+ 
+ .email {
+    font-weight: 600;
+ }
+ 
+ .password {
+    font-weight: 600;
+ }
+ 
+ .button-ll {
+    height: 46px;
+    width: 120px;
+    background: linear-gradient(to right, #11998e,
+     #38ef7d);
+    border: none !important;
+ }
+ 
+ .button-rr {
+    height: 46px;
+    width: 120px;
+    background: linear-gradient(to right, #11998e,
+     #38ef7d);
+     border: none !important;
+ }
+ 
+ .btnns-wrapp{
+    display: flex;
+    flex-direction: column;
+   
+ }
+ 
+ .orca {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ }
+ 
+ .g-orca {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 46px;
+    background: #ffffff !important;
+    
+ }
+ 
+ .g-orca-b{
+    height: 46px;
+    width: 285px;
+    background: #ffffff !important;
+    border: 1px solid #222222 !important;
+ 
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+ 
+ 
+ }
+ 
+ .cog-div{
+    margin-top: 3.3px;
+    margin-left: 20px;
+    color: #222222;
+ 
+ }
+ .google-svg{
+    margin-bottom: 11.5px;
+    margin-left: 5px;
+ }
+ 
+ 
+ .btn-p-lwrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+ 
+ }

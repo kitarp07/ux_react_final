@@ -19,6 +19,8 @@ import Khalti from "./components/Khalti/Khalti";
 import Account from "./components/Account";
 import StayDetail from "./components/StayDetail";
 import CheckoutStay from "./components/CheckoutStay";
+import FlightDetail from "./components/FlightDetail";
+import CheckoutFlight from "./components/CheckoutFlight";
 function App() {
   return (
     <>
@@ -31,8 +33,10 @@ function App() {
         <Route path='/home' element={< Home />} />
         <Route path='/checkout/trip/:id' element={<Checkout/>}/>
         <Route path='/checkout/stays/:id' element={<CheckoutStay/>}/>
+        <Route path='/checkout/flight/:id' element={<CheckoutFlight/>}/>
         <Route path='/khalti' element={<Khalti/>}/>
         <Route path='/account' element={<Account/>}/>
+        <Route path='/flight-detail/:id' element={<FlightDetail/>}/>
 
         </Routes>
       </Router>
