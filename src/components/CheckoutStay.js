@@ -117,6 +117,7 @@ export default function CheckoutStay() {
     const stay = id;
     const numTravelers = newNumP;
     const trip_type = "Stay";
+    const pricee = newNumP * trip?.price
 
     checkoutServices
       .createCheckout({
@@ -130,6 +131,7 @@ export default function CheckoutStay() {
         city,
         country,
         trip_type,
+        pricee
       })
       .then((res) => {
         console.log(res.data);

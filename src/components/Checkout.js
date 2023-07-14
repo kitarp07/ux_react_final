@@ -92,6 +92,7 @@ export default function Checkout() {
   const [formattedDate2, setFormattedDate2] = useState("");
   const [differenceInDays, setDifferenceInDays] = useState(0);
   const [price, setPrice] = useState(0);
+  const [price2, setPrice2] = useState(0);
 
   useEffect(() => {
     if (trip && trip.startDate) {
@@ -124,11 +125,12 @@ export default function Checkout() {
       setDifferenceInDays(calculatedDifferenceInDays);
     }
 
-    if (trip & trip.price) {
+    if (trip && trip.price) {
       const val = trip.price;
 
-      const p = 1000 * price;
+      const p = 1000 * val;
       setPrice(p);
+      setPrice2(val)
     }
   }, [trip]);
 
@@ -141,6 +143,8 @@ export default function Checkout() {
     const trip = id;
     const numTravelers = newNumP;
     const trip_type = "Trip";
+    const pricee = newNumP * price2
+    console.log(pricee)
 
     checkoutServices
       .createCheckout({
@@ -154,6 +158,7 @@ export default function Checkout() {
         city,
         country,
         trip_type,
+        pricee
       })
       .then((res) => {
         console.log(res.data);

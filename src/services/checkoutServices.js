@@ -35,6 +35,7 @@ const createCheckout = (data) => {
     formData.append("city", data.city)
     formData.append("country", data.country)
     formData.append("trip_type", data.trip_type)
+    formData.append("pricee", data.pricee)
 
     return(axios.post(`${checkoutUrl}/`, formData
     , {

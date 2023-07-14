@@ -9,7 +9,7 @@ import accommodationServices from "../services/accommodationServices";
 import flightsServices from "../services/flightsServices";
 import userServices from "../services/userServices";
 
-
+import checkoutServices from "../services/checkoutServices";
 export default function AdminPage() {
   const [selectedFilter, setSelectedFilter] = useState(1);
 
@@ -18,6 +18,7 @@ export default function AdminPage() {
   const [staysData, setStaysData] = useState([]);
   const [bookingData, setBookingData] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [checkOutData, setCheckOutData] = useState([]);
 
   const baseUrl = "http://localhost:3001";
 
@@ -49,6 +50,12 @@ export default function AdminPage() {
     });
   }, [2000]);
 
+  useEffect(() => {
+    checkoutServices.getCheckouts().then((res) => {
+      console.log(res.data);
+      setCheckOutData(res.data);
+    });
+  }, [2000]);
   const trips = [
     {
       title: "S.N",
@@ -268,6 +275,69 @@ export default function AdminPage() {
     },
   ];
 
+  console.log(checkOutData)
+
+  const checkouts = [
+    {
+      title: "S.N",
+      dataIndex: "",
+      key: "S.N",
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: "User",
+      dataIndex: "ref",
+      key: "user",
+      render: (text, record) => {
+        if (record.user) {
+          return <span>{record.user.fullname}</span>;
+        } 
+      },
+
+    },
+    {
+      title: "Type",
+      dataIndex: "trip_type",
+      key: "trip_type",
+    },
+
+
+
+    {
+      title: 'Destination',
+      dataIndex: 'ref',
+      key: 'reference',
+      render: (text, record) => {
+        if (record.trip) {
+          return <span>{record.trip.destination}</span>;
+        } else if (record.flight) {
+          return <span>{record.flight.destination}</span>;
+        } else if (record.stay) {
+          return <span>{record.stay.location}</span>;
+        }else {
+          return <span>N/A</span>;
+        }
+      },
+    },
+
+   
+    
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Delete</a>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <div>
       <AdminNavbar />
@@ -299,7 +369,9 @@ export default function AdminPage() {
 
             {selectedFilter === 4 && (
               <>
-               
+                <>
+                <Table columns={checkouts} dataSource={checkOutData}  />;
+              </>
               </>
             )}
             

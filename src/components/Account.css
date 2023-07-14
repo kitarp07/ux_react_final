@@ -189,6 +189,9 @@
 .save-edit-button{
     height: 45px;
     width: 140px;
+    background: linear-gradient(to right, #11998e,
+    #38ef7d);
+    border: none !important;
 }
 
 .pd-edit-button{
