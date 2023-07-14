@@ -10,15 +10,31 @@ import {
   Label,
 } from "reactstrap";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import KhaltiCheckout from "khalti-checkout-web";
 import config from "./Khalti/khaltiConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import tripServices from "../services/tripServices";
 import accommodationServices from "../services/accommodationServices";
 import flightsServices from "../services/flightsServices";
+import moment from "moment";
+import checkoutServices from "../services/checkoutServices";
+
 
 export default function CheckoutFlight() {
   let checkout = new KhaltiCheckout(config);
+
+  const [street_address, setStreetAddress] = useState("");
+  const [apartment_number, setApartmentNumber] = useState("");
+  const [state, setState] = useState("");
+  const [zipcode, setZipCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
+ 
+
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -29,8 +45,17 @@ export default function CheckoutFlight() {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const { numP } = useParams();
+  const { checkInDate } = useParams();
+  const { checkOutDate } = useParams();
+
+  const formatted_1 = moment(checkInDate).format("YYYY/MM/DD");
+  const formatted_2 = moment(checkOutDate).format("YYYY/MM/DD");
 
   console.log("productId:", id);
+  console.log(numP);
+  console.log(checkInDate);
+  console.log(checkOutDate);
 
   const [trip, setTrip] = useState([]);
   useEffect(() => {
@@ -54,7 +79,7 @@ export default function CheckoutFlight() {
 
   useEffect(() => {
     if (trip && trip.departure_date) {
-      const startDate = trip.departure_date;
+      const startDate = formatted_1;
       const [year, month, day] = startDate.split("/");
       const date = new Date(year, month - 1, day);
       const fd1 = date.toLocaleDateString(undefined, {
@@ -66,7 +91,7 @@ export default function CheckoutFlight() {
     }
 
     if (trip && trip.arrival_date) {
-      const endDate = trip.arrival_date;
+      const endDate = formatted_2;
       const [year2, month2, day2] = endDate.split("/");
       const date2 = new Date(year2, month2 - 1, day2);
       const fd2 = date2.toLocaleDateString(undefined, {
@@ -94,6 +119,45 @@ export default function CheckoutFlight() {
   const fprice = trip?.no_of_passengers * trip?.price;
   // Rest of your component code
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user = window.localStorage.getItem("uid");
+    const flight = id;
+    const numTravelers = numP;
+    const trip_type = "Flight";
+
+    checkoutServices.createCheckout({
+        user,
+        flight,
+        numTravelers,
+        apartment_number,
+        street_address,
+        state,
+        zipcode,
+        city,
+        country,
+        trip_type,
+      })
+      .then((res) => {
+        console.log(res.data);
+        notify();
+      })
+      .catch((err) => window.alert(err.response.data.msg));
+  };
+
+  const notify = () => {
+    toast.success('Your flight has been booked!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  };
   return (
     <div>
       <Navbar />
@@ -121,7 +185,7 @@ export default function CheckoutFlight() {
             <div className="num-edit">
               <div className="num-p">
                 <p className="n-1">Number of Participants</p>
-                <p className="n-2">{trip?.no_of_passengers} participants</p>
+                <p className="n-2">{numP} participants</p>
               </div>
               <div className="n-edit">
                 <a>Edit</a>
@@ -143,9 +207,7 @@ export default function CheckoutFlight() {
                   name="street"
                   placeholder="Street Address"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setStreetAddress(e.target.value)}
                 />
               </FormGroup>
 
@@ -157,9 +219,7 @@ export default function CheckoutFlight() {
                   name="apartment"
                   placeholder="Apartment number"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setApartmentNumber(e.target.value)}
                 />
               </FormGroup>
               <div>
@@ -171,9 +231,7 @@ export default function CheckoutFlight() {
                     name="state"
                     placeholder="State"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setState(e.target.value)}
                   />
                 </FormGroup>
 
@@ -185,9 +243,7 @@ export default function CheckoutFlight() {
                     name="zipcode"
                     placeholder="Zip code"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setZipCode(e.target.value)}
                   />
                 </FormGroup>
               </div>
@@ -200,9 +256,19 @@ export default function CheckoutFlight() {
                   name="city"
                   placeholder="Enter city"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Input
+                  style={{ height: "56px", fontSize: "17px" }}
+                  className="city"
+                  id="country"
+                  name="country"
+                  placeholder="Enter country"
+                  type="text"
+                  onChange={(e) => setCountry(e.target.value)}
                 />
               </FormGroup>
               <div className="payment-div">
@@ -217,7 +283,9 @@ export default function CheckoutFlight() {
                     <div
                       className="khalti"
                       onClick={() => {
-                        checkout.show({ amount: trip?.price * 100 * trip?.no_of_passengers });
+                        checkout.show({
+                          amount: trip?.price * 100 * trip?.no_of_passengers,
+                        });
                       }}
                     >
                       <img
@@ -237,7 +305,7 @@ export default function CheckoutFlight() {
                 {/* <ReactStrapButton className="rb-1" >
                   Make Reservation
                 </ReactStrapButton> */}
-                <ReactStrapButton className="rb-2">
+                <ReactStrapButton onClick={handleSubmit} className="rb-2">
                   Make Reservation
                 </ReactStrapButton>
               </div>
@@ -280,7 +348,9 @@ export default function CheckoutFlight() {
             </div>
             <div className="pd-2">
               <div className="guests-price">
-                <p className="gp-1">{trip?.no_of_passengers} passengers x Nrs {trip?.price} </p>
+                <p className="gp-1">
+                  {trip?.no_of_passengers} passengers x Nrs {trip?.price}{" "}
+                </p>
               </div>
 
               <div className="price">
@@ -300,6 +370,20 @@ export default function CheckoutFlight() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }

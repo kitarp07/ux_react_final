@@ -16,8 +16,8 @@ import axios from "axios";
 
 import tripServices from "../services/tripServices";
 import flightsServices from "../services/flightsServices";
-import moment from "moment";
 
+import checkoutServices from "../services/checkoutServices";
 import { DatePicker, Space } from "antd";
 export default function FlightDetail() {
   const navigate = useNavigate();
@@ -29,20 +29,24 @@ export default function FlightDetail() {
 
   const [isTrip, setIsTrip] = useState(false);
 
-  const [checkInDate, setCheckInDate] = useState();
-  const [checkOutDate, setCheckOutDate] = useState();
+  const [checkInDate, setCheckInDate] = useState('2023-07-20');
+  const [checkOutDate, setCheckOutDate] = useState('2023-07-25');
+
+  const [numP, setNumP] = useState(3);
 
   const onChange_in = (date, dateString) => {
     console.log(date, dateString);
-    const formattedCd = moment(dateString).format("YYYY/MM/DD");
-    setCheckInDate(formattedCd);
+   
+    setCheckInDate(dateString);
   };
 
   const onChange_out = (date, dateString) => {
     console.log(date, dateString);
-    const formattedCOd = moment(dateString).format("YYYY/MM/DD");
-    setCheckOutDate(formattedCOd);
+   
+    setCheckOutDate(dateString);
   };
+
+
 
   useEffect(() => {
     flightsServices
@@ -62,6 +66,7 @@ export default function FlightDetail() {
   const baseUrl = "http://localhost:3001";
 
   const imagess = trip.img;
+
 
   return (
     <div>
@@ -181,45 +186,57 @@ export default function FlightDetail() {
             </div>
             <div className="booking-dates">
               <div className="check-in">
-                <p className="ci"> Check in</p>
-                <p className="ci2">
+                <div className="ci"> Start</div>
+                <div className="ci2">
                   <Space direction="vertical">
-                    <DatePicker className="date-pik" onChange={onChange_in} />
+                    <DatePicker className="date-pik-fb" onChange={onChange_in} />
                   </Space>
-                </p>
+                </div>
               </div>
               <div className="check-out">
-                <p p className="co">
+                <div p className="ci">
                   {" "}
-                  Check out
-                </p>
-                <p className="co2">
-                  <Space direction="vertical">
-                    <DatePicker className="date-pik" onChange={onChange_out} />
+                  End
+                </div>
+                <div className="ci2">
+                  <Space direction="vertical" >
+                    <DatePicker className="date-pik-fb" onChange={onChange_out} />
                   </Space>
-                </p>
+                </div>
               </div>
             </div>
 
             <div className="guests-div">
               <div className="num">
                 <div className="cg">
-                  <p className="g1"> Guests</p>
-                  <p className="g2">Add guests</p>
+                  <div className="g1"> Guests</div>
+                  <div className="g2">
+                    <FormGroup>
+                      <Input
+                      id="numG"
+                      className="f-numg"
+                      name="num_of_guests"
+                      type="text"
+                      placeholder="Enter number of passengers"
+                      onChange={(e) => setNumP(e.target.value)}
+
+                      />
+                    </FormGroup>
+                  </div>
                 </div>
-                <KeyboardArrowDownIcon className="down-icon" />
+          
               </div>
             </div>
 
             <div className="price-div">
               <div className="guests-price">
                 <p>
-                  {trip?.no_of_passengers} passengers x Nrs {trip?.price}
+                  {numP} passengers x Nrs {trip?.price}
                 </p>
               </div>
 
               <div className="price">
-                <p>Nrs {trip?.price}</p>
+                <p>Nrs {trip?.price * numP}</p>
               </div>
             </div>
 
@@ -229,13 +246,13 @@ export default function FlightDetail() {
               </div>
 
               <div className="tp2">
-                <p>Nrs {price}</p>
+                <p>Nrs {trip?.price * numP}</p>
               </div>
             </div>
 
             <div
               onClick={() => {
-                navigate(`/checkout/flight/${id}`);
+                navigate(`/checkout/flight/${id}/${numP}/${checkInDate}/${checkOutDate}`);
               }}
               className="book-button"
             >

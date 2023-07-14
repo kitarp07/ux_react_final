@@ -16,11 +16,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import tripServices from "../services/tripServices";
 
 import { DatePicker, Space } from "antd";
+import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Checkout() {
+  const [street_address, setStreetAddress] = useState("");
+  const [apartment_number, setApartmentNumber] = useState("");
+  const [state, setState] = useState("");
+  const [zipcode, setZipCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
   const [showDatePik, setShowDatePik] = useState(false);
 
   const [showEditNumGuests, setShowEditNumGuests] = useState(false);
+
+  const { numP } = useParams();
+  const { startDate } = useParams();
+  const { endDate } = useParams();
+
+  const formatted_1 = moment(startDate).format("YYYY/MM/DD");
+  const formatted_2 = moment(endDate).format("YYYY/MM/DD");
 
   const handleDatePik = () => {
     setShowDatePik(true);
@@ -76,7 +93,7 @@ export default function Checkout() {
 
   useEffect(() => {
     if (trip && trip.startDate) {
-      const startDate = trip.startDate;
+      const startDate = formatted_1;
       const [year, month, day] = startDate.split("/");
       const date = new Date(year, month - 1, day);
       const fd1 = date.toLocaleDateString(undefined, {
@@ -88,7 +105,7 @@ export default function Checkout() {
     }
 
     if (trip && trip.endDate) {
-      const endDate = trip.endDate;
+      const endDate = formatted_2;
       const [year2, month2, day2] = endDate.split("/");
       const date2 = new Date(year2, month2 - 1, day2);
       const fd2 = date2.toLocaleDateString(undefined, {
@@ -112,6 +129,8 @@ export default function Checkout() {
       setPrice(p);
     }
   }, [trip]);
+
+  const [newNumP, setNewNumP] = useState(numP);
 
   // Rest of your component code
 
@@ -179,13 +198,13 @@ export default function Checkout() {
                         <div>
                           <FormGroup>
                             <Input
-                            style={{boxShadow:"none"}}
+                              style={{ boxShadow: "none" }}
                               className="numOfGuests"
                               id="numGuests"
                               name="numGuests"
-                              placeholder={trip?.numberOfPassengers}
+                              placeholder={numP}
                               type="text"
-                              // onChange={(e) => setPassword(e.target.value)}
+                              onChange={(e) => setNewNumP(e.target.value)}
                             />
                           </FormGroup>
                         </div>
@@ -200,9 +219,7 @@ export default function Checkout() {
                 <div className="num-edit">
                   <div className="num-p">
                     <p className="n-1">Number of Participants</p>
-                    <p className="n-2">
-                      {trip?.numberOfPassengers} participants
-                    </p>
+                    <p className="n-2">{newNumP} participants</p>
                   </div>
                   <div onClick={handleNumEdit} className="n-edit">
                     <a>Edit</a>
@@ -228,9 +245,7 @@ export default function Checkout() {
                   name="street"
                   placeholder="Street Address"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setStreetAddress(e.target.value)}
                 />
               </FormGroup>
 
@@ -242,9 +257,7 @@ export default function Checkout() {
                   name="apartment"
                   placeholder="Apartment number"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setApartmentNumber(e.target.value)}
                 />
               </FormGroup>
               <div>
@@ -256,9 +269,7 @@ export default function Checkout() {
                     name="state"
                     placeholder="State"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setState(e.target.value)}
                   />
                 </FormGroup>
 
@@ -270,9 +281,7 @@ export default function Checkout() {
                     name="zipcode"
                     placeholder="Zip code"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setZipCode(e.target.value)}
                   />
                 </FormGroup>
               </div>
@@ -285,9 +294,18 @@ export default function Checkout() {
                   name="city"
                   placeholder="Enter city"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  style={{ height: "56px", fontSize: "17px" }}
+                  className="city"
+                  id="country"
+                  name="country"
+                  placeholder="Enter country"
+                  type="text"
+                  onChange={(e) => setCountry(e.target.value)}
                 />
               </FormGroup>
               <div className="payment-div">
@@ -302,7 +320,7 @@ export default function Checkout() {
                     <div
                       className="khalti"
                       onClick={() => {
-                        checkout.show({ amount: trip?.price * 100 });
+                        checkout.show({ amount: trip?.price * 100 * newNumP });
                       }}
                     >
                       <img
@@ -350,7 +368,7 @@ export default function Checkout() {
                   <p className="i-1"> {trip?.title}</p>
                 </div>
                 <div className="i-d2">
-                  <p className="i-2">{differenceInDays} days trip</p>
+                  <p className="i-2">{formattedDate} to {formattedDate2}</p>
                 </div>
               </div>
             </div>
@@ -363,12 +381,12 @@ export default function Checkout() {
             <div className="pd-2">
               <div className="guests-price">
                 <p className="gp-1">
-                  {trip?.numberOfPassengers} guests x 20 Nrs
+                  {newNumP} participants x {trip?.price} Nrs
                 </p>
               </div>
 
               <div className="price">
-                <p className="gp-1">Nrs {trip?.price} </p>
+                <p className="gp-1">Nrs {trip?.price * newNumP} </p>
               </div>
             </div>
           </div>
@@ -379,7 +397,7 @@ export default function Checkout() {
             </div>
 
             <div className="rd-p-2">
-              <p> NRs {trip?.price}</p>
+              <p> NRs {trip?.price * newNumP}</p>
             </div>
           </div>
         </div>

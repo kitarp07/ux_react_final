@@ -330,3 +330,34 @@
     border-color: #ddd;
     border: none !important;
 }
+
+.ci{
+    height: 16px;
+    margin-left: 12px;
+}
+
+.ci2{
+    margin-bottom: 20px;
+}
+
+
+.date-pik-tb{
+    margin-bottom: 20px;
+    border: none;
+   
+}
+
+.g1{
+    height: 16px;
+    margin-left: 12px;
+}
+
+.t-numg{
+    border: none;
+    box-shadow: none !important;
+    height: 30px;
+    font-size: 14px;
+    width: 300px;
+    
+    
+}
