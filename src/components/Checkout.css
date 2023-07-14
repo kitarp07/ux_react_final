@@ -268,3 +268,17 @@
    border: none !important;
 
 }
+
+.d-edit {
+   cursor: pointer;
+}
+
+.n-edit {
+   cursor: pointer;
+}
+
+.ed-pik{
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}

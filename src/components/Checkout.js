@@ -15,7 +15,31 @@ import config from "./Khalti/khaltiConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import tripServices from "../services/tripServices";
 
-export default function Checkout () {
+import { DatePicker, Space } from "antd";
+
+export default function Checkout() {
+  const [showDatePik, setShowDatePik] = useState(false);
+
+  const [showEditNumGuests, setShowEditNumGuests] = useState(false);
+
+  const handleDatePik = () => {
+    setShowDatePik(true);
+  };
+  const handleDatePikFalse = () => {
+    setShowDatePik(false);
+  };
+
+  const handleNumEdit = () => {
+    setShowEditNumGuests(true);
+  };
+  const handleNumEditFalse = () => {
+    setShowEditNumGuests(false);
+  };
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
   let checkout = new KhaltiCheckout(config);
 
   const onFinish = (values) => {
@@ -32,7 +56,8 @@ export default function Checkout () {
 
   const [trip, setTrip] = useState([]);
   useEffect(() => {
-    tripServices.getTripById(id)
+    tripServices
+      .getTripById(id)
       .then((res) => {
         console.log(res.data);
         setTrip(res.data);
@@ -80,15 +105,12 @@ export default function Checkout () {
       setDifferenceInDays(calculatedDifferenceInDays);
     }
 
-    if(trip & trip.price){
-      const val = trip.price
+    if (trip & trip.price) {
+      const val = trip.price;
 
-      const p = 1000 * price
-      setPrice(p)
-
-
+      const p = 1000 * price;
+      setPrice(p);
     }
-   
   }, [trip]);
 
   // Rest of your component code
@@ -97,43 +119,107 @@ export default function Checkout () {
     <div>
       <Navbar />
       <div className="checkout">
-        <div className="checkout-wrap">
-          <div>
-            <p className="r-title"> Make Reservation </p>
-          </div>
-          <div className="book-details">
-            <div className="your-trip">
-              <p className="t-d">Your Trip Details</p>
+        <Form onSubmit={() => {}}>
+          <div className="checkout-wrap">
+            <div>
+              <p className="r-title"> Make Reservation </p>
             </div>
-            <div className="dates-edit">
-              <div className="dates">
-                <p className="d-1">Dates</p>
-                <p className="d-2">
-                  {formattedDate} - {formattedDate2}
+            <div className="book-details">
+              <div className="your-trip">
+                <p className="t-d">Your Trip Details</p>
+              </div>
+
+              {showDatePik ? (
+                <div className="dates-edit">
+                  <div className="dates">
+                    <p className="d-1">Dates</p>
+                    <p className="d-2">
+                      <div className="ed-pik">
+                        <div style={{ fontWeight: "600", paddingTop: "2px" }}>
+                          Edit date:
+                        </div>
+                        <div>
+                          <Space direction="vertical">
+                            <DatePicker
+                              className="date-pik-chk"
+                              onChange={onChange}
+                            />
+                          </Space>
+                        </div>
+                      </div>
+                    </p>
+                  </div>
+                  <div onClick={handleDatePikFalse} className="d-edit">
+                    <a>Cancel</a>
+                  </div>
+                </div>
+              ) : (
+                <div className="dates-edit">
+                  <div className="dates">
+                    <p className="d-1">Dates</p>
+                    <p className="d-2">
+                      {formattedDate} - {formattedDate2}
+                    </p>
+                  </div>
+                  <div onClick={handleDatePik} className="d-edit">
+                    <a>Edit</a>
+                  </div>
+                </div>
+              )}
+
+              {showEditNumGuests ? (
+                <div className="num-edit">
+                  <div className="num-p">
+                    <p className="n-1">Number of Participants</p>
+                    <p className="n-2">
+                      <div className="ed-pik">
+                        <div style={{ fontWeight: "600", paddingTop: "4px" }}>
+                          Edit num of people:
+                        </div>
+                        <div>
+                          <FormGroup>
+                            <Input
+                            style={{boxShadow:"none"}}
+                              className="numOfGuests"
+                              id="numGuests"
+                              name="numGuests"
+                              placeholder={trip?.numberOfPassengers}
+                              type="text"
+                              // onChange={(e) => setPassword(e.target.value)}
+                            />
+                          </FormGroup>
+                        </div>
+                      </div>
+                    </p>
+                  </div>
+                  <div onClick={handleNumEditFalse} className="n-edit">
+                    <a>Cancel</a>
+                  </div>
+                </div>
+              ) : (
+                <div className="num-edit">
+                  <div className="num-p">
+                    <p className="n-1">Number of Participants</p>
+                    <p className="n-2">
+                      {trip?.numberOfPassengers} participants
+                    </p>
+                  </div>
+                  <div onClick={handleNumEdit} className="n-edit">
+                    <a>Edit</a>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="form-wrap">
+              <div>
+                <p
+                  className="c-d"
+                  style={{ fontSize: "20px", fontWeight: 600 }}
+                >
+                  Checkout Details
                 </p>
               </div>
-              <div className="d-edit">
-                <a>Edit</a>
-              </div>
-            </div>
 
-            <div className="num-edit">
-              <div className="num-p">
-                <p className="n-1">Number of Participants</p>
-                <p className="n-2">{trip?.numberOfPassengers} participants</p>
-              </div>
-              <div className="n-edit">
-                <a>Edit</a>
-              </div>
-            </div>
-          </div>
-          <div className="form-wrap">
-            <div>
-              <p className="c-d" style={{ fontSize: "20px", fontWeight: 600 }}>
-                Checkout Details
-              </p>
-            </div>
-            <Form onSubmit={() => {}}>
               <FormGroup>
                 <Input
                   style={{ height: "56px", fontSize: "17px" }}
@@ -240,9 +326,9 @@ export default function Checkout () {
                   Make Reservation
                 </ReactStrapButton>
               </div>
-            </Form>
+            </div>
           </div>
-        </div>
+        </Form>
         <div className="r-book-card">
           <div className="r-book-card-title">
             <p className="r-details">Reservation Info</p>
@@ -276,7 +362,9 @@ export default function Checkout () {
             </div>
             <div className="pd-2">
               <div className="guests-price">
-                <p className="gp-1">{trip?.numberOfPassengers} guests x 20 Nrs</p>
+                <p className="gp-1">
+                  {trip?.numberOfPassengers} guests x 20 Nrs
+                </p>
               </div>
 
               <div className="price">

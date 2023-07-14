@@ -32,6 +32,7 @@ import { Height } from "@mui/icons-material";
 
 import { DatePicker, Space } from "antd";
 
+
 export default function Navbar() {
   const navigate = useNavigate();
   const baseUrl = "http://localhost:3000/";
@@ -42,6 +43,9 @@ export default function Navbar() {
   const handleSearch = () => {
     setShowSearch(true);
   };
+
+
+
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
