@@ -20,6 +20,8 @@ import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import checkoutServices from "../services/checkoutServices";
+
 export default function Checkout() {
   const [street_address, setStreetAddress] = useState("");
   const [apartment_number, setApartmentNumber] = useState("");
@@ -132,7 +134,50 @@ export default function Checkout() {
 
   const [newNumP, setNewNumP] = useState(numP);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user = window.localStorage.getItem("uid");
+    const trip = id;
+    const numTravelers = newNumP;
+    const trip_type = "Trip";
+
+    checkoutServices
+      .createCheckout({
+        user,
+        trip,
+        numTravelers,
+        apartment_number,
+        street_address,
+        state,
+        zipcode,
+        city,
+        country,
+        trip_type,
+      })
+      .then((res) => {
+        console.log(res.data);
+        notify();
+       
+      })
+      .catch((err) => window.alert(err.response.data.msg));
+  };
+
   // Rest of your component code
+  const notify = () => {
+    toast.success(`Your trip has been booked for ${formattedDate} to ${formattedDate2}!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  
+  };
 
   return (
     <div>
@@ -340,7 +385,7 @@ export default function Checkout() {
                 {/* <ReactStrapButton className="rb-1" >
                   Make Reservation
                 </ReactStrapButton> */}
-                <ReactStrapButton className="rb-2">
+                <ReactStrapButton onClick={handleSubmit} className="rb-2">
                   Make Reservation
                 </ReactStrapButton>
               </div>
@@ -368,7 +413,9 @@ export default function Checkout() {
                   <p className="i-1"> {trip?.title}</p>
                 </div>
                 <div className="i-d2">
-                  <p className="i-2">{formattedDate} to {formattedDate2}</p>
+                  <p className="i-2">
+                    {formattedDate} to {formattedDate2}
+                  </p>
                 </div>
               </div>
             </div>
@@ -402,6 +449,20 @@ export default function Checkout() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }

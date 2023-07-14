@@ -13,7 +13,20 @@ const checkoutUrl = 'http://localhost:3001/checkout'
 const createCheckout = (data) => {
     const formData = new FormData();
     formData.append("user", data.user)
-    formData.append("flight", data.flight)
+    if (data.flight){
+        formData.append("flight", data.flight)
+
+    }
+    if (data.trip){
+        formData.append("trip", data.trip)
+
+    }
+
+    if (data.stay){
+        formData.append("trip", data.stay)
+
+    }
+ 
     formData.append("numTravelers", data.numTravelers)
     formData.append("street_address", data.street_address)
     formData.append("apartment_number", data.apartment_number)

@@ -193,7 +193,7 @@ export default function TripDetail() {
 
             <div className="price-div">
               <div className="guests-price">
-                <p>{numP} guests x {trip?.price}$</p>
+                <p>{numP} guests x {trip?.price} Nrs$</p>
               </div>
 
               <div className="price">

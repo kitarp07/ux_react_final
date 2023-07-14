@@ -15,8 +15,20 @@ import config from "./Khalti/khaltiConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import tripServices from "../services/tripServices";
 import accommodationServices from "../services/accommodationServices";
+import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function CheckoutStay () {
+import checkoutServices from "../services/checkoutServices";
+
+export default function CheckoutStay() {
+  const [street_address, setStreetAddress] = useState("");
+  const [apartment_number, setApartmentNumber] = useState("");
+  const [state, setState] = useState("");
+  const [zipcode, setZipCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
   let checkout = new KhaltiCheckout(config);
 
   const onFinish = (values) => {
@@ -28,12 +40,19 @@ export default function CheckoutStay () {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const { numP } = useParams();
+  const { startDate } = useParams();
+  const { endDate } = useParams();
+
+  const formatted_1 = moment(startDate).format("YYYY/MM/DD");
+  const formatted_2 = moment(endDate).format("YYYY/MM/DD");
 
   console.log("productId:", id);
 
   const [trip, setTrip] = useState([]);
   useEffect(() => {
-    accommodationServices.getStayById(id)
+    accommodationServices
+      .getStayById(id)
       .then((res) => {
         console.log(res.data);
         setTrip(res.data);
@@ -52,7 +71,7 @@ export default function CheckoutStay () {
 
   useEffect(() => {
     if (trip && trip.checkInDate) {
-      const startDate = trip.checkInDate;
+      const startDate = formatted_1;
       const [year, month, day] = startDate.split("/");
       const date = new Date(year, month - 1, day);
       const fd1 = date.toLocaleDateString(undefined, {
@@ -64,7 +83,7 @@ export default function CheckoutStay () {
     }
 
     if (trip && trip.checkOutDate) {
-      const endDate = trip.checkOutDate;
+      const endDate = formatted_2;
       const [year2, month2, day2] = endDate.split("/");
       const date2 = new Date(year2, month2 - 1, day2);
       const fd2 = date2.toLocaleDateString(undefined, {
@@ -81,17 +100,57 @@ export default function CheckoutStay () {
       setDifferenceInDays(calculatedDifferenceInDays);
     }
 
-    if(trip & trip.price){
-      const val = trip.price
+    if (trip & trip.price) {
+      const val = trip.price;
 
-      const p = 1000 * price
-      setPrice(p)
-
-
+      const p = 1000 * price;
+      setPrice(p);
     }
-   
   }, [trip]);
 
+  const [newNumP, setNewNumP] = useState(numP);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user = window.localStorage.getItem("uid");
+    const stay = id;
+    const numTravelers = newNumP;
+    const trip_type = "Stay";
+
+    checkoutServices
+      .createCheckout({
+        user,
+        stay,
+        numTravelers,
+        apartment_number,
+        street_address,
+        state,
+        zipcode,
+        city,
+        country,
+        trip_type,
+      })
+      .then((res) => {
+        console.log(res.data);
+        notify();
+      })
+      .catch((err) => window.alert(err.response.data.msg));
+  };
+
+  // Rest of your component code
+  const notify = () => {
+    toast.success(`Your accommodation has been booked for ${formattedDate} to ${formattedDate2}!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   // Rest of your component code
 
   return (
@@ -143,9 +202,7 @@ export default function CheckoutStay () {
                   name="street"
                   placeholder="Street Address"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setStreetAddress(e.target.value)}
                 />
               </FormGroup>
 
@@ -157,9 +214,7 @@ export default function CheckoutStay () {
                   name="apartment"
                   placeholder="Apartment number"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setApartmentNumber(e.target.value)}
                 />
               </FormGroup>
               <div>
@@ -171,9 +226,7 @@ export default function CheckoutStay () {
                     name="state"
                     placeholder="State"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setState(e.target.value)}
                   />
                 </FormGroup>
 
@@ -185,9 +238,7 @@ export default function CheckoutStay () {
                     name="zipcode"
                     placeholder="Zip code"
                     type="text"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)
-                    // }
+                    onChange={(e) => setZipCode(e.target.value)}
                   />
                 </FormGroup>
               </div>
@@ -200,9 +251,18 @@ export default function CheckoutStay () {
                   name="city"
                   placeholder="Enter city"
                   type="text"
-                  // value={username}
-                  // onChange={(e) => setUsername(e.target.value)
-                  // }
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  style={{ height: "56px", fontSize: "17px" }}
+                  className="city"
+                  id="country"
+                  name="country"
+                  placeholder="Enter country"
+                  type="text"
+                  onChange={(e) => setCountry(e.target.value)}
                 />
               </FormGroup>
               <div className="payment-div">
@@ -217,7 +277,7 @@ export default function CheckoutStay () {
                     <div
                       className="khalti"
                       onClick={() => {
-                        checkout.show({ amount: trip?.price * 100 });
+                        checkout.show({ amount: trip?.price * 100 * newNumP });
                       }}
                     >
                       <img
@@ -237,7 +297,7 @@ export default function CheckoutStay () {
                 {/* <ReactStrapButton className="rb-1" >
                   Make Reservation
                 </ReactStrapButton> */}
-                <ReactStrapButton className="rb-2">
+                <ReactStrapButton onClick={handleSubmit} className="rb-2">
                   Make Reservation
                 </ReactStrapButton>
               </div>
@@ -265,7 +325,9 @@ export default function CheckoutStay () {
                   <p className="i-1"> {trip?.name}</p>
                 </div>
                 <div className="i-d2">
-                  <p className="i-2">{differenceInDays} days trip</p>
+                  <p className="i-2">
+                    {formattedDate} to {formattedDate2}
+                  </p>
                 </div>
               </div>
             </div>
@@ -277,11 +339,13 @@ export default function CheckoutStay () {
             </div>
             <div className="pd-2">
               <div className="guests-price">
-                <p className="gp-1">{trip?.numberOfGuests} guests</p>
+                <p className="gp-1">
+                  {newNumP} guests x {trip?.price}
+                </p>
               </div>
 
               <div className="price">
-                <p className="gp-1">Nrs {trip?.price} </p>
+                <p className="gp-1">Nrs {trip?.price * newNumP} </p>
               </div>
             </div>
           </div>
@@ -292,11 +356,25 @@ export default function CheckoutStay () {
             </div>
 
             <div className="rd-p-2">
-              <p> NRs {trip?.price}</p>
+              <p> NRs {trip?.price * newNumP}</p>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { DatePicker, Space } from "antd";
 
 import tripServices from "../services/tripServices";
 import accommodationServices from "../services/accommodationServices";
@@ -20,29 +21,39 @@ export default function StayDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  console.log("productId:", id);
 
-  console.log('productId:', id);
+  const [startDate, setStartDate] = useState("2023-07-20");
+  const [endDate, setEndDate] = useState("2023-07-25");
 
-
+  const [numP, setNumP] = useState(3);
   const [trip, setTrip] = useState([]);
 
-  const [isTrip, setIsTrip] = useState(false)
+  const [isTrip, setIsTrip] = useState(false);
 
+  const onChange_s = (date, dateString) => {
+    console.log(date, dateString);
 
-  useEffect(()=> {
+    setStartDate(dateString);
+  };
 
-    accommodationServices.getStayById(id).then((res)=>{
-      console.log(res.data)
-      setTrip(res.data)
-      
-    }).catch((err)=> console.log(err))
-  }, [id])
+  const onChange_e = (date, dateString) => {
+    console.log(date, dateString);
 
-  
+    setEndDate(dateString);
+  };
 
-  
+  useEffect(() => {
+    accommodationServices
+      .getStayById(id)
+      .then((res) => {
+        console.log(res.data);
+        setTrip(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
   const baseUrl = "http://localhost:3001";
-
 
   return (
     <div>
@@ -64,31 +75,25 @@ export default function StayDetail() {
         {}
 
         <div className="trip-images">
-
-        {trip && Array.isArray(trip.img) && trip.img.length > 0  ? (
-        <><div>
-              <img
-                className="trip-img"
-                src={`${baseUrl}/${trip.img[0]}`}
-                alt="" />
-            </div><div className="img-grid">
+          {trip && Array.isArray(trip.img) && trip.img.length > 0 ? (
+            <>
+              <div>
                 <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[1]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[2]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[3]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[4]}`} />
-              </div></>
-      ) : (
-        <p>No images available.</p>
-      )}
-         
+                  className="trip-img"
+                  src={`${baseUrl}/${trip.img[0]}`}
+                  alt=""
+                />
+              </div>
+              <div className="img-grid">
+                <img className="grid-img" src={`${baseUrl}/${trip.img[1]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[2]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[3]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[4]}`} />
+              </div>
+            </>
+          ) : (
+            <p>No images available.</p>
+          )}
         </div>
 
         <div className="below-details">
@@ -103,9 +108,7 @@ export default function StayDetail() {
             </div>
             <div className="about">
               <p className="about-title">About this trip</p>
-              <p className="about-info">
-               {trip?.description}
-              </p>
+              <p className="about-info">{trip?.description}</p>
             </div>
             <div className="offers">
               <p className="offers-title">Offers</p>
@@ -117,10 +120,7 @@ export default function StayDetail() {
             </div>
             <div className="itinerary">
               <p className="itinerary-title">Info</p>
-              <p className="itinerary-info">
-                  {trip?.info}
-               
-              </p>
+              <p className="itinerary-info">{trip?.info}</p>
             </div>
           </div>
 
@@ -130,15 +130,23 @@ export default function StayDetail() {
             </div>
             <div className="booking-dates">
               <div className="check-in">
-                <p className="ci"> Check in</p>
-                <p className="ci2">Add Date</p>
+                <div className="ci"> Start</div>
+                <div className="ci2">
+                  <Space direction="vertical">
+                    <DatePicker className="date-pik-tb" onChange={onChange_s} />
+                  </Space>
+                </div>
               </div>
               <div className="check-out">
-                <p p className="co">
+                <p p className="ci">
                   {" "}
-                  Check out
+                  End
                 </p>
-                <p className="co2">Add Date</p>
+                <div className="ci2">
+                  <Space direction="vertical">
+                    <DatePicker className="date-pik-tb" onChange={onChange_e} />
+                  </Space>
+                </div>
               </div>
             </div>
 
@@ -146,19 +154,31 @@ export default function StayDetail() {
               <div className="num">
                 <div className="cg">
                   <p className="g1"> Guests</p>
-                  <p className="g2">Add guests</p>
+                  <p className="g2">
+                    {" "}
+                    <FormGroup>
+                      <Input
+                        id="numOfpeople"
+                        className="t-numg"
+                        name="num_of_trippers"
+                        type="text"
+                        placeholder="Enter number of passengers"
+                        onChange={(e) => setNumP(e.target.value)}
+                      />
+                    </FormGroup>
+                  </p>
                 </div>
-                <KeyboardArrowDownIcon className="down-icon" />
+               
               </div>
             </div>
 
             <div className="price-div">
               <div className="guests-price">
-                <p>{trip?.numberOfGuests} guests</p>
+                <p>{numP} guests x {trip?.price} Nrs$</p>
               </div>
 
               <div className="price">
-                <p>{trip?.price} Nrs</p>
+                <p>{trip?.price * numP} Nrs</p>
               </div>
             </div>
 
@@ -168,13 +188,13 @@ export default function StayDetail() {
               </div>
 
               <div className="tp2">
-                <p>{trip?.price} Nrs</p>
+                <p>{trip?.price * numP} Nrs</p>
               </div>
             </div>
 
             <div
               onClick={() => {
-                navigate(`/checkout/stays/${id}`);
+                navigate(`/checkout/stays/${id}/${numP}/${startDate}/${endDate}`);
               }}
               className="book-button"
             >

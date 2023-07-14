@@ -40,7 +40,7 @@ function App() {
         <Route path='/accommodation-detail/:id' element={< StayDetail />} />
         <Route path='/home' element={< Home />} />
         <Route path='/checkout/trip/:id/:numP/:startDate/:endDate' element={<Checkout/>}/>
-        <Route path='/checkout/stays/:id' element={<CheckoutStay/>}/>
+        <Route path='/checkout/stays/:id/:numP/:startDate/:endDate' element={<CheckoutStay/>}/>
         <Route path='/checkout/flight/:id/:numP/:checkInDate/:checkOutDate' element={<CheckoutFlight/>}/>
         <Route path='/khalti' element={<Khalti/>}/>
         <Route path='/account/:id' element={<Account/>}/>
