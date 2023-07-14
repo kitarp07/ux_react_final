@@ -47,6 +47,12 @@
 
 .fc-search {
     margin-bottom: 10px;
+    background: linear-gradient(to right, #00b4db,
+    #0083b0);
+    border: none;
+    height: 40px;
+    width: 80px;
+    border-radius: 4px;
 
 }
 

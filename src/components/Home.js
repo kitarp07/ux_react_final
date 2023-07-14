@@ -10,16 +10,24 @@ import { Footer } from "./Footer";
 export default function Home(){
 
     const [selectedFilter, setSelectedFilter] = useState(1);
+    const [searchItem, setSearchItems] = useState("");
+    const [searchDate, setSearchDate] = useState("");
 
+    const [data, setData] = useState([]);
+
+    const handleSearch = (searchText, searchDate) => {
+        setSearchItems(searchText)
+        setSearchDate(searchDate)
+      };
 
 
     return (
         <div>
-            <Navbar />
+            <Navbar onSearch = {handleSearch}  />
             <Icons selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
             {selectedFilter ===2 && <FlightCardTopBar/>}
             {selectedFilter ===2 && <FlightCardMidBar/>}
-            <Cards selectedFilter={selectedFilter} />
+            <Cards selectedFilter={selectedFilter} searchItem={searchItem} searchDate={searchDate} setSearchItem={setSearchItems} setSearchDate={setSearchDate} />
           
            
 

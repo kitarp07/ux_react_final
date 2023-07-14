@@ -77,7 +77,7 @@ function FlightCardMidBar({ trip }) {
                 </div>
                 <div className="fc-view-btn">
                   <div className="fc-btn-div-mb">
-                    <ReactStrapButton>View</ReactStrapButton>
+                    <ReactStrapButton className="fc-search">View</ReactStrapButton>
                   </div>
                 </div>
               </div>

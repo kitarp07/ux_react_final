@@ -116,7 +116,7 @@ function FlightCard({ trip }) {
                 </div>
                 <div className="fc-view-btn">
                   <div className="fc-btn-div">
-                    <ReactStrapButton onClick={()=> {navigate(`/flight-detail/${trip._id}`)}}>View</ReactStrapButton>
+                    <ReactStrapButton className="fc-search" onClick={()=> {navigate(`/flight-detail/${trip._id}`)}}>View</ReactStrapButton>
                   </div>
                 </div>
               </div>

@@ -20,7 +20,13 @@ import { Modal } from "react-bootstrap";
 
 import airplane from "../assets/icons/airplane.png";
 import ft from "../assets/icons/ft.png";
+
+import { DatePicker, Space } from "antd";
 function FlightCardTopBar() {
+
+  const [destination, setDestination] = useState('')
+  const [departure, setDeparture] = useState('')
+  const [arrival, setArrival] = useState('')
 
   return (
     <div className="flight-card">
@@ -102,7 +108,7 @@ function FlightCardTopBar() {
                 <div className="fc-search-btn">
                   <ReactStrapButton className="fc-search">
                     {" "}
-                    search{" "}
+                    Search{" "}
                   </ReactStrapButton>
                 </div>
               </div>

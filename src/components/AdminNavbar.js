@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import logo from "../assets/logo/logo5.png";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import BasicMenu from "./navmenu";
+import AdminBasicMenu from "./AdminNavMenu";
 import SimpleBottomNavigation from "./BottomNavigation";
 import MobileSearchBar from "./MobileSearchBar";
 import Button from "@mui/material/Button";
@@ -30,40 +30,28 @@ import { Height } from "@mui/icons-material";
 
 // import userServices from '../services/userServices';
 
-import { Form as AntForm, DatePicker, Space } from "antd";
+import { DatePicker, Space } from "antd";
 
-export default function Navbar({ onSearch }) {
+
+export default function AdminNavbar() {
   const navigate = useNavigate();
   const baseUrl = "http://localhost:3000/";
   // const[user, setUser] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [searchDate, setSearchDate] = useState("");
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSearchText('');
-      setSearchDate('');
-    }, 2000);
-
-    return () => clearTimeout(timeout); // Cleanup the timeout on component unmount
-  }, []);
-
-  const handleSearchItem = () => {
-    if (searchDate.length > 0 || searchText.length > 0) {
-      console.log(searchDate, searchText);
-      onSearch(searchText, searchDate);
-    }
-  };
 
   const handleSearch = () => {
     setShowSearch(true);
   };
 
+
+
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       // Perform the desired actions after the specified delay
       setShowSearch(false);
+      console.log("Delayed action");
     }, 200);
 
     return () => clearTimeout(timeoutId);
@@ -71,13 +59,6 @@ export default function Navbar({ onSearch }) {
 
   const onChange = (date, dateString) => {
     console.log(date, dateString);
-    setSearchDate(dateString);
-  };
-
-  const [form] = AntForm.useForm();
-
-  const handleClear = () => {
-    form.resetFields(["date"]);
   };
 
   const handleLogout = (e) => {
@@ -139,7 +120,6 @@ export default function Navbar({ onSearch }) {
                       name="searchs"
                       placeholder=""
                       type="text"
-                      value={searchText}
                       onChange={(e) => setSearchText(e.target.value)}
                     />
                   </FormGroup>
@@ -158,17 +138,15 @@ export default function Navbar({ onSearch }) {
             <div className="sd-1-1">
               <div className="">
                 {" "}
-                <AntForm form={form}>
-                  <Space direction="vertical">
-                    <DatePicker className="date-pik" onChange={onChange} />
-                  </Space>
-                </AntForm>
+                <Space direction="vertical">
+                  <DatePicker className="date-pik" onChange={onChange} />
+                </Space>
               </div>
               {/* <div className="sd-dd-2">Add Dates</div> */}
             </div>
 
-            <div className="search-item3" onClick={handleSearchItem}>Click to Search</div>
-            <div className="search-icon-container" onClick={handleSearchItem}>
+            <div className="search-item3">Click to Search</div>
+            <div className="search-icon-container">
               <svg
                 className="search-icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +176,7 @@ export default function Navbar({ onSearch }) {
         </div>
         <div className="trips">My Trips</div>
         <div className="profile">
-          <BasicMenu />
+          <AdminBasicMenu />
         </div>
       </div>
       <MobileSearchBar />

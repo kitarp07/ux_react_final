@@ -21,13 +21,21 @@ import StayDetail from "./components/StayDetail";
 import CheckoutStay from "./components/CheckoutStay";
 import FlightDetail from "./components/FlightDetail";
 import CheckoutFlight from "./components/CheckoutFlight";
+import AdminPage from "./components/Admin";
+import { useEffect } from "react";
+import { Google } from "@mui/icons-material";
+
 function App() {
+
+  
+
+
   return (
     <>
       <Router>
         
         <Routes>
-        <Route  path='' element={<Navigate to="/home" replace={true} />}/>
+        <Route  path='' element={<Home/>}/>
         <Route path='/trip-detail/:id' element={< TripDetail />} />
         <Route path='/accommodation-detail/:id' element={< StayDetail />} />
         <Route path='/home' element={< Home />} />
@@ -37,6 +45,7 @@ function App() {
         <Route path='/khalti' element={<Khalti/>}/>
         <Route path='/account/:id' element={<Account/>}/>
         <Route path='/flight-detail/:id' element={<FlightDetail/>}/>
+        <Route path='/admin' element={<AdminPage/>}/>
 
         </Routes>
       </Router>

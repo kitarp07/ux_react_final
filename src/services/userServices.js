@@ -26,6 +26,10 @@ function getUser (id) {
     return axios.get(`${baseUrl}/${id}`)
 }
 
+function getAllUser () {
+    return axios.get(`${baseUrl}/`)
+}
+
 
 
 function update(id, data){
@@ -43,4 +47,4 @@ function deleteAccount(id){
     return axios.delete(`${baseUrl}/${id}`)
 
 }
-export default {login, register, getUser, update, deleteAccount};
+export default {login, register, getUser, update, deleteAccount, getAllUser};

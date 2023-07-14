@@ -16,48 +16,52 @@ import axios from "axios";
 
 import tripServices from "../services/tripServices";
 import flightsServices from "../services/flightsServices";
+import moment from "moment";
+
+import { DatePicker, Space } from "antd";
 export default function FlightDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-
-  console.log('productId:', id);
-
+  console.log("productId:", id);
 
   const [trip, setTrip] = useState([]);
 
-  const [isTrip, setIsTrip] = useState(false)
+  const [isTrip, setIsTrip] = useState(false);
 
+  const [checkInDate, setCheckInDate] = useState();
+  const [checkOutDate, setCheckOutDate] = useState();
 
-  useEffect(()=> {
+  const onChange_in = (date, dateString) => {
+    console.log(date, dateString);
+    const formattedCd = moment(dateString).format("YYYY/MM/DD");
+    setCheckInDate(formattedCd);
+  };
 
-    flightsServices.getFlightById(id).then((res)=>{
-      console.log(res.data)
-      setTrip(res.data)
-      
-    }).catch((err)=> console.log(err))
-  }, [id])
+  const onChange_out = (date, dateString) => {
+    console.log(date, dateString);
+    const formattedCOd = moment(dateString).format("YYYY/MM/DD");
+    setCheckOutDate(formattedCOd);
+  };
 
-  
-  
+  useEffect(() => {
+    flightsServices
+      .getFlightById(id)
+      .then((res) => {
+        console.log(res.data);
+        setTrip(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-  console.log(trip)
-  console.log(trip.img)
+  console.log(trip);
+  console.log(trip.img);
 
-  const price =trip?.no_of_passengers * trip?.price
+  const price = trip?.no_of_passengers * trip?.price;
 
-  
-
-  
   const baseUrl = "http://localhost:3001";
 
-  const imagess = trip.img
-  
-  
-  
- 
-
-
+  const imagess = trip.img;
 
   return (
     <div>
@@ -79,31 +83,25 @@ export default function FlightDetail() {
         {}
 
         <div className="trip-images">
-
-        {trip && Array.isArray(trip.img) && trip.img.length > 0  ? (
-        <><div>
-              <img
-                className="trip-img"
-                src={`${baseUrl}/${trip.img[0]}`}
-                alt="" />
-            </div><div className="img-grid">
+          {trip && Array.isArray(trip.img) && trip.img.length > 0 ? (
+            <>
+              <div>
                 <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[1]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[2]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[3]}`} />
-                <img
-                  className="grid-img"
-                  src={`${baseUrl}/${trip.img[4]}`} />
-              </div></>
-      ) : (
-        <p>No images available.</p>
-      )}
-         
+                  className="trip-img"
+                  src={`${baseUrl}/${trip.img[0]}`}
+                  alt=""
+                />
+              </div>
+              <div className="img-grid">
+                <img className="grid-img" src={`${baseUrl}/${trip.img[1]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[2]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[3]}`} />
+                <img className="grid-img" src={`${baseUrl}/${trip.img[4]}`} />
+              </div>
+            </>
+          ) : (
+            <p>No images available.</p>
+          )}
         </div>
 
         <div className="below-details">
@@ -119,75 +117,62 @@ export default function FlightDetail() {
             <div className="about">
               <p className="about-title">About this trip</p>
               <p className="about-info">
-               {trip?.origin} to {trip?.destination} flight hosted by {trip?.airline}.
+                {trip?.origin} to {trip?.destination} flight hosted by{" "}
+                {trip?.airline}.
               </p>
             </div>
             <div className="offers">
               <p className="offers-title">Info</p>
               <div className="offer-div">
                 <div className="dep-div">
-                    <div className="dep-icon">
-                        <p>Departure Time :    </p>
-
-                    </div>
-                    <div className="dep-c">
-                        <p> {trip?.departure_date}, {trip?.departure_time}</p>
-
-                    </div>
-
+                  <div className="dep-icon">
+                    <p>Departure Time : </p>
+                  </div>
+                  <div className="dep-c">
+                    <p>
+                      {" "}
+                      {trip?.departure_date}, {trip?.departure_time}
+                    </p>
+                  </div>
                 </div>
                 <div className="dep-div">
-                    <div className="dep-icon">
-                        <p>Arrival Time :    </p>
-
-                    </div>
-                    <div className="dep-c">
-                        <p> {trip?.arrival_date}, {trip?.arrival_time}</p>
-
-                    </div>
-
+                  <div className="dep-icon">
+                    <p>Arrival Time : </p>
+                  </div>
+                  <div className="dep-c">
+                    <p>
+                      {" "}
+                      {trip?.arrival_date}, {trip?.arrival_time}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="dep-div">
-                    <div className="dep-icon">
-                        <p>Baggage Limit :    </p>
-
-                    </div>
-                    <div className="dep-c">
-                        <p> {trip?.baggage_limit}</p>
-
-                    </div>
-
+                  <div className="dep-icon">
+                    <p>Baggage Limit : </p>
+                  </div>
+                  <div className="dep-c">
+                    <p> {trip?.baggage_limit}</p>
+                  </div>
                 </div>
                 <div className="dep-div">
-                    <div className="dep-icon">
-                        <p>Carry Baggage Limit :    </p>
-
-                    </div>
-                    <div className="dep-c">
-                        <p> {trip?.baggage_carry_limit}</p>
-
-                    </div>
-
+                  <div className="dep-icon">
+                    <p>Carry Baggage Limit : </p>
+                  </div>
+                  <div className="dep-c">
+                    <p> {trip?.baggage_carry_limit}</p>
+                  </div>
                 </div>
                 <div className="dep-div">
-                    <div className="dep-icon">
-                        <p>Flight Duration :    </p>
-
-                    </div>
-                    <div className="dep-c">
-                        <p> {trip?.flightDuration}</p>
-
-                    </div>
-
+                  <div className="dep-icon">
+                    <p>Flight Duration : </p>
+                  </div>
+                  <div className="dep-c">
+                    <p> {trip?.flightDuration}</p>
+                  </div>
                 </div>
-
-             
-               
-                
               </div>
             </div>
-          
           </div>
 
           <div className="book-card">
@@ -197,14 +182,22 @@ export default function FlightDetail() {
             <div className="booking-dates">
               <div className="check-in">
                 <p className="ci"> Check in</p>
-                <p className="ci2">Add Date</p>
+                <p className="ci2">
+                  <Space direction="vertical">
+                    <DatePicker className="date-pik" onChange={onChange_in} />
+                  </Space>
+                </p>
               </div>
               <div className="check-out">
                 <p p className="co">
                   {" "}
                   Check out
                 </p>
-                <p className="co2">Add Date</p>
+                <p className="co2">
+                  <Space direction="vertical">
+                    <DatePicker className="date-pik" onChange={onChange_out} />
+                  </Space>
+                </p>
               </div>
             </div>
 
@@ -220,7 +213,9 @@ export default function FlightDetail() {
 
             <div className="price-div">
               <div className="guests-price">
-                <p>{trip?.no_of_passengers} passengers x Nrs {trip?.price}</p>
+                <p>
+                  {trip?.no_of_passengers} passengers x Nrs {trip?.price}
+                </p>
               </div>
 
               <div className="price">

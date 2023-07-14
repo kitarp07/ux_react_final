@@ -11,7 +11,29 @@ import {
 import { Modal } from "react-bootstrap";
 import "./Modal.css";
 import userServices from "../services/userServices";
+import { useEffect } from "react";
 export default function LoginModal({ showLoginModal, setShowLoginModal }) {
+
+  function handleCallBackResponse(response){
+
+
+  }
+
+  useEffect (()=>{
+    /* global google */
+    // google.accounts.id.initialize({
+    //   client_id: "354158358887-lds8tu0cuqo9b3jlidbae71cd6sh73c2.apps.googleusercontent.com",
+    //   callback: handleCallBackResponse
+
+    // })
+
+    // google.accounts.id.renderButton(
+    //   document.getElementById("g-signin"),
+    //   {theme: "outline", size:"large"}
+    // )
+
+    
+  }, [])
   const [showModal, setShowModal] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -86,9 +108,10 @@ export default function LoginModal({ showLoginModal, setShowLoginModal }) {
               </ReactStrapButton>
             </div>
 
-            <div className="orca">Or</div>
-            <div className="g-orca">
-              <ReactStrapButton className="g-orca-b">
+            {/* <div className="orca">Or</div> */}
+            <div className="g-orc" id="g-orca">
+             
+              {/* <ReactStrapButton className="g-orca-b">
                 <div className="btn-p-lwrap">
                   <div>
                     <svg
@@ -121,7 +144,7 @@ export default function LoginModal({ showLoginModal, setShowLoginModal }) {
                     <p>Continue with google</p>
                   </div>
                 </div>
-              </ReactStrapButton>
+              </ReactStrapButton> */}
             </div>
           </Form>
         </Modal.Body>
